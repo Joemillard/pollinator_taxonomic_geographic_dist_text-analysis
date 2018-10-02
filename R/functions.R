@@ -1,3 +1,7 @@
+#### will need to rerun and fix for different "taxa_data$..taxonID" column names
+
+
+
 ### scrape_abs function
 # scrape_abs() will scrape each abstract, 
 # assign NA where no species are returned, 
@@ -57,7 +61,7 @@ species <- function(taxa_data, count){
       
       # whenever see the pattern of author in scientific name, remove it, make a dataframe from rows at that iteration, save to list
       temp <- gsub(taxa_data$scientificNameAuthorship[i], "", taxa_data$scientificName[i])
-      temp_spec <- data.frame(temp, taxa_data$kingdom[i], taxa_data$class[i], taxa_data$order[i], taxa_data$scientificNameAuthorship[i], taxa_data$family[i], taxa_data$ï..taxonID[i], taxa_data$acceptedNameUsageID[i], taxa_data$parentNameUsageID[i], taxa_data$taxonomicStatus[i])
+      temp_spec <- data.frame(temp, taxa_data$kingdom[i], taxa_data$class[i], taxa_data$order[i], taxa_data$scientificNameAuthorship[i], taxa_data$family[i], taxa_data$..taxonID[i], taxa_data$acceptedNameUsageID[i], taxa_data$parentNameUsageID[i], taxa_data$taxonomicStatus[i])
       data[[i]] <- temp_spec
       
       # print iteration number when error encountered
@@ -85,7 +89,7 @@ check_abb <- function(locations){
     abb_spec <- abb_merge %>% 
       filter(EID == loc[i]) %>%
       filter(!duplicated(scientific_name)) %>%
-      select(scientific_name, first_word, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., Year, original, taxa_data.scientificNameAuthorship.i., Title, File_loc, taxa_data.family.i., taxa_data.ï..taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.)
+      select(scientific_name, first_word, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., Year, original, taxa_data.scientificNameAuthorship.i., Title, File_loc, taxa_data.family.i., taxa_data...taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.)
     abb[[i]] <- abb_spec
     
     # loop through list of DOIs in temp_direct, remove scientific names, and assign to abb as i element
@@ -119,7 +123,7 @@ check_abb <- function(locations){
     
     # if there are no direct_spec or abb_spec in that DOI return row of NAs
     else {
-      joined <- data.frame(scientific_name = NA, first_word = NA, taxa_data.kingdom.i. = NA, taxa_data.class.i. = NA, taxa_data.order.i. = NA, Year = NA, original = NA, taxa_data.scientificNameAuthorship.i. = NA, Title = NA, File_loc = NA, taxa_data.family.i. = NA, taxa_data.ï..taxonID.i. = NA, taxa_data.acceptedNameUsageID.i. = NA, taxa_data.parentNameUsageID.i. = NA, taxa_data.taxonomicStatus.i. = NA)
+      joined <- data.frame(scientific_name = NA, first_word = NA, taxa_data.kingdom.i. = NA, taxa_data.class.i. = NA, taxa_data.order.i. = NA, Year = NA, original = NA, taxa_data.scientificNameAuthorship.i. = NA, Title = NA, File_loc = NA, taxa_data.family.i. = NA, taxa_data...taxonID.i. = NA, taxa_data.acceptedNameUsageID.i. = NA, taxa_data.parentNameUsageID.i. = NA, taxa_data.taxonomicStatus.i. = NA)
       temp_3 <- data.frame(joined, loc[i])
       #colnames(temp_3) <- c("scientific_name", "File_loc")
       new_joined[[i]] <- temp_3
