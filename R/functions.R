@@ -342,3 +342,36 @@ unique_row_spec <- function(aggregated) {
   return(aggregated_unique)
   
 }
+
+# look for abstracts with one of the country strings in countries_vec
+count_countries <- function(download, countries){
+  
+  # make empty list object
+  data <- list()
+  
+  # iterate through each of the downloads abstract object
+  for (i in 1:nrow(download)) ({
+    
+    # iterate through each of the countries
+    for (j in 1:length(countries)) ({
+      
+      # if country in the abstract, assign a boolean
+      logical_name <- grepl(countries[j], download$abstract[i])
+      
+      # if boolean is true build row of dataframe for that abstract
+      if(logical_name == TRUE)({
+        
+        # build dataframe for that iteration and assign to element of a list
+        data[[i*j]] <- data.frame(countries[j], download$EID[i])
+      })
+    })
+    
+    print(i)
+    
+  })
+  
+  # bind all rows and return
+  species_countries <- rbindlist(data)
+  return(species_countries)
+  
+}
