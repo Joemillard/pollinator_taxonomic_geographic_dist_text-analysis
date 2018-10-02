@@ -280,3 +280,63 @@ speciesify <- function(scraped, first_word, last_word) {
   # return scraped
   return(species)
 }
+
+# remove duplicated records from each column for aggregated DOI: year, species, country, and file location
+unique_row_DOI <- function(aggregated) {
+  
+  # create empty list
+  data <- list()
+  
+  # loop through and for each column remove duplicates
+  for(i in 1:nrow(aggregated)){
+    split_spec <- unlist(strsplit(aggregated$scientific_name[i], split=", "))
+    unique_spec <- paste(unique(split_spec), collapse = ", ") 
+    split_year <- unlist(strsplit(aggregated$Year[i], split=", "))
+    unique_year <- paste(unique(split_year), collapse = ", ") 
+    split_level <- unlist(strsplit(aggregated$level[i], split=", "))
+    unique_level <- paste(unique(split_level), collapse = ", ") 
+    split_name <- unlist(strsplit(aggregated$name[i], split=", "))
+    unique_name <- paste(unique(split_name), collapse = ", ") 
+    split_class <- unlist(strsplit(aggregated$taxa_data.class.i.[i], split=", "))
+    unique_class <- paste(unique(split_class), collapse = ", ") 
+    data[[i]] <- data.frame(aggregated$EID[i], unique_spec, unique_name, unique_year, unique_level, unique_class)
+    
+  }
+  
+  # bind the resulting data frames and return
+  aggregated_unique <- rbindlist(data)
+  return(aggregated_unique)
+  
+}
+
+# remove duplicated records from each column for aggregated species: year, species, country, and file location
+unique_row_spec <- function(aggregated) {
+  
+  # create empty list
+  data <- list()
+  
+  # loop through and for each column remove duplicates
+  for(i in 1:nrow(aggregated_spec)){
+    split_year <- unlist(strsplit(aggregated$Year[i], split=", "))
+    unique_year <- paste(unique(split_year), collapse = ", ") 
+    split_level <- unlist(strsplit(aggregated$level[i], split=", "))
+    unique_level <- paste(unique(split_level), collapse = ", ") 
+    split_loc <- unlist(strsplit(aggregated$EID[i], split=", "))
+    unique_loc <- paste(unique(split_loc), collapse = ", ")
+    split_name <- unlist(strsplit(aggregated$name[i], split=", "))
+    unique_name <- paste(unique(split_name), collapse = ", ")
+    split_class <- unlist(strsplit(aggregated$taxa_data.class.i.[i], split=", "))
+    unique_class <- paste(unique(split_class), collapse = ", ")
+    split_order <- unlist(strsplit(aggregated$taxa_data.order.i.[i], split=", "))
+    unique_order <- paste(unique(split_order), collapse = ", ")
+    split_family <- unlist(strsplit(aggregated$taxa_data.family.i.[i], split=", "))
+    unique_family <- paste(unique(split_family), collapse = ", ")
+    data[[i]] <- data.frame(aggregated$scientific_name[i], unique_year, unique_level, unique_loc, unique_name, unique_order, unique_class, unique_family)
+    
+  }
+  
+  # bind the resulting data frames and return
+  aggregated_unique <- rbindlist(data)
+  return(aggregated_unique)
+  
+}
