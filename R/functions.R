@@ -1,7 +1,5 @@
 #### will need to rerun and fix for different "taxa_data$..taxonID" column names
 
-
-
 ### scrape_abs function
 # scrape_abs() will scrape each abstract, 
 # assign NA where no species are returned, 
