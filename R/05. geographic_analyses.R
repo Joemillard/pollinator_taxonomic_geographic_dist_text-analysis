@@ -38,7 +38,7 @@ species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Out
 
 # select main columns 
 species_scraped <- species_scraped %>%
-  dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data.ï..taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
+  dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
 
 # get unique species_scraped titles
 species_EID <- species_scraped %>% 

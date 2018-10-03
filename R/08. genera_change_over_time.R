@@ -32,7 +32,7 @@ scrape_clean <- speciesify(scraped = species_scrape, first_word = 1, last_word =
 
 # unique species rows
 scrape_clean <- scrape_clean %>% 
-  select(-X, -taxa_data.scientificNameAuthorship.i., -taxa_data.ï..taxonID.i., -taxa_data.parentNameUsageID.i., -taxa_data.acceptedNameUsageID.i.) %>% 
+  select(-X, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.parentNameUsageID.i., -taxa_data.acceptedNameUsageID.i.) %>% 
   group_by(EID) %>% 
   unique() %>% 
   ungroup()

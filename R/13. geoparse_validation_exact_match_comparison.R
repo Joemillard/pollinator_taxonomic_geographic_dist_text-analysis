@@ -34,7 +34,7 @@ geoparsed <- geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
 
 # select main columns 
 species_scraped <- species_scraped %>%
-  dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data.ï..taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
+  dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
 
 # subset geoparsed for those EID in species_scrape
 geoparsed <- geoparsed %>%

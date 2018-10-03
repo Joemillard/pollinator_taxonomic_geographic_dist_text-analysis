@@ -11,7 +11,7 @@ library(data.table)
 library(fuzzyjoin)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/functions.R")
+source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
 ### read in the csvs for taxonomic data and the scraped records
 
@@ -28,7 +28,7 @@ all_records <- all_abs %>%
   rename(File_loc = DOI)
 
 # read in COL data, change to character and rename variable
-unique_col <- readRDS("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Taxonomic data/2017-annual/cleaned/unique_COL_species_02.rds")
+unique_col <- readRDS("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Taxonomic data/2017-annual/cleaned/unique_COL_species_03.rds")
 unique_col <- unique_col %>%
   rename(scientific_name = temp) %>%
   mutate_all(as.character)
@@ -47,7 +47,7 @@ unique_col$scientific_name <- unique_col$scientific_name %>%
 # merge those that match directly in all_records with the COL data - 7524 unique animal species and 42063 in total
 direct_merge <- inner_join(unique_col, all_records, by = "scientific_name")
 direct_merge <- direct_merge %>%
-  select(scientific_name, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., File_loc, Year, original, taxa_data.scientificNameAuthorship.i., Title, EID, taxa_data.family.i., taxa_data.ï..taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.) %>%
+  select(scientific_name, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., File_loc, Year, original, taxa_data.scientificNameAuthorship.i., Title, EID, taxa_data.family.i., taxa_data...taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.) %>%
   mutate(level = "1a")
 
 # 42063 in total merged at level 1a
@@ -112,7 +112,7 @@ unique_col$ab <- unique_col$scientific_name %>%
 
 # remove the second word column
 unique_col <- unique_col %>% 
-  select(scientific_name, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., taxa_data.scientificNameAuthorship.i., ab, taxa_data.family.i., taxa_data.ï..taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.)
+  select(scientific_name, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., taxa_data.scientificNameAuthorship.i., ab, taxa_data.family.i., taxa_data...taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.)
 
 # change the scientific_name column to ab for merging the abbreviations with the COL
 all_records <- all_records %>%
@@ -165,10 +165,10 @@ accepted <- level_1_2 %>%
 # filter out accepted names
 synonyms <- level_1_2 %>% 
   filter(taxa_data.taxonomicStatus.i. != "accepted name") %>%
-  select(File_loc, Year, original, Title, EID, taxa_data.ï..taxonID.i., taxa_data.acceptedNameUsageID.i., level)
+  select(File_loc, Year, original, Title, EID, taxa_data...taxonID.i., taxa_data.acceptedNameUsageID.i., level)
 
 # join accepted name ID to taxa ID
-accepted_synonym <- inner_join(synonyms, unique_col, by = c("taxa_data.acceptedNameUsageID.i." = "taxa_data.ï..taxonID.i."))
+accepted_synonym <- inner_join(synonyms, unique_col, by = c("taxa_data.acceptedNameUsageID.i." = "taxa_data...taxonID.i."))
 
 # remove extra column
 accepted_synonym <- accepted_synonym %>%
