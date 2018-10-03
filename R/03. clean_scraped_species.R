@@ -15,10 +15,6 @@ source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geo
 
 ### read in the csvs for taxonomic data and the scraped records
 
-# read in raw scraped species records from 6303 papers, now 694179, and duplicate the original scrape column
-all_records <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_papers/6303-papers_Year_Title.csv", stringsAsFactors = FALSE)
-all_records$original <- all_records$scientific_name
-
 # read abstract scrape
 all_abs <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/Abstracts/03_30644-abs_DOI_Year_Title_EID.csv", stringsAsFactors=FALSE)
 all_abs$original <- all_abs$scientific_name

@@ -10,7 +10,7 @@ library(AER)
 library(viridis)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/functions.R")
+source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
 # read in cleaned file
 species_scrape <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
@@ -141,4 +141,3 @@ ggplot(joined_species) +
   scale_x_continuous(breaks = c(1960, 1970, 1980, 1990, 2000, 2010))
 
 ggsave("overall-pollination-studies-change.png", dpi = 350, scale = 1.1)
-

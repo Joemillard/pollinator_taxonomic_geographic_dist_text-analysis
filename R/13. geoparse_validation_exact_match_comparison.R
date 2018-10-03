@@ -11,7 +11,7 @@ library(raster)
 library(patchwork)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/functions.R")
+source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
 # read in countries adn extract string
 countries <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/ISO-3166-Countries-with-Regional-Codes-master/all/all.csv", header = TRUE, stringsAsFactors = FALSE)
