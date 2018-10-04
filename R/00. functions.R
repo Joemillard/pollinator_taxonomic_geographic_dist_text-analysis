@@ -106,7 +106,6 @@ check_abb <- function(locations){
       # there are matches return build into dataframe
       if (length(joined$scientific_name > 0)) {
         temp_1 <- data.frame(joined, loc[i])
-        #colnames(temp_1) <- c("scientific_name", "File_loc")
         new_joined[[i]] <- temp_1
       }
       
@@ -114,7 +113,6 @@ check_abb <- function(locations){
       else {
         joined[1,] <- NA
         temp_2 <- data.frame(joined, loc[i])
-        #colnames(temp_2) <- c("scientific_name", "File_loc")
         new_joined[[i]] <- temp_2
       }
     }
@@ -123,7 +121,6 @@ check_abb <- function(locations){
     else {
       joined <- data.frame(scientific_name = NA, first_word = NA, taxa_data.kingdom.i. = NA, taxa_data.class.i. = NA, taxa_data.order.i. = NA, Year = NA, original = NA, taxa_data.scientificNameAuthorship.i. = NA, Title = NA, File_loc = NA, taxa_data.family.i. = NA, taxa_data...taxonID.i. = NA, taxa_data.acceptedNameUsageID.i. = NA, taxa_data.parentNameUsageID.i. = NA, taxa_data.taxonomicStatus.i. = NA)
       temp_3 <- data.frame(joined, loc[i])
-      #colnames(temp_3) <- c("scientific_name", "File_loc")
       new_joined[[i]] <- temp_3
     }
   }
