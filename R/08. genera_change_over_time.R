@@ -1,4 +1,7 @@
-## script for average change over time
+## script for average change over time at the level of genus
+
+# vector for the packages to install 
+packages <- c("dplyr", "stringr", "reshape2", "ggplot2", "forcats", "AER")
 
 # packages 
 library(dplyr)
@@ -6,7 +9,6 @@ library(stringr)
 library(reshape2)
 library(ggplot2)
 library(forcats)
-library(AER)
 library(viridis)
 
 # source the functions R script
@@ -32,6 +34,7 @@ scrape_clean <- speciesify(scraped = species_scrape, first_word = 1, last_word =
 
 # unique species rows
 scrape_clean <- scrape_clean %>% 
+  dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
   select(-X, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.parentNameUsageID.i., -taxa_data.acceptedNameUsageID.i.) %>% 
   group_by(EID) %>% 
   unique() %>% 
