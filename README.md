@@ -295,7 +295,7 @@ loaded via a namespace (and not attached):
 [15] pkgconfig_2.0.2  bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2
 ```
 ---
-**11. validation_relatedness_pollination.R** - script for constructing relatedness to polliantion figures
+**11. validation_relatedness_pollination.R** - script for constructing relatedness to pollination figures
 
 Session info
 ```
