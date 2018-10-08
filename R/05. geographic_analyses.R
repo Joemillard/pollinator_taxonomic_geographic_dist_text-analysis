@@ -1,4 +1,4 @@
-#### scripts for building maps and country level distribution histogram
+## scripts for building maps and country level distribution histogram
 
 # vector for packages to install
 packages <- c("dplyr", "rworldmap", "rworldxtra", "ggplot2", "patchwork", "raster", "mapproj", "forcats", "plyr", "data.table")
@@ -31,8 +31,7 @@ geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outp
 # read in the species scraped data
 species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
-#### set up the data for the first density map and country histogram
-
+## set up the data for the first density map and country histogram
 # select main columns 
 species_scraped <- species_scraped %>%
   dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
@@ -112,7 +111,7 @@ density_map <- ggplot() +
 # save the plot
 ggsave("abstract_geoparse-major-minor_ratio_13.png", dpi = 380, scale = 1.5)
 
-#### build bar plot frequencies for country proportions
+## build bar plot frequencies for country proportions
 proportion_bar <- area_within %>% 
   filter(proportion > 0.014) %>%
   summarise(rn = "Rest of the world",
@@ -146,7 +145,7 @@ ggplot(proportion_bar) +
 # save the plot
 ggsave("abstract_geoparse_study-proportion-7.png", dpi = 380, scale = 1.5)
 
-#### map facetted by taxonomic group - set up the data
+## map facetted by taxonomic group - set up the data
 
 # run for major focus
 spec_geoparsed_major <- form_geoparse(data = species_geoparsed, foc = "major", continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")
@@ -217,8 +216,7 @@ spec_geoparsed_other <- spec_geoparsed_minor %>%
 spec_geoparsed_minor <- spec_geoparsed_minor %>%
   filter(scientific_name != "Other genera")
 
-#### main facet for other genera - build the map
-
+## main facet for other genera - build the main map
 other_map <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = group), 
                fill = "lightgrey", data = within_map) +
@@ -236,8 +234,7 @@ other_map <- ggplot() +
         legend.key = element_rect(colour = NA, fill = NA), 
         strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm")))
 
-#### Facet by key taxonomic group - build the secondary facets
-
+## Facet by key taxonomic group - build the secondary facets
 # static plot
 taxonomy_map <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = group), 
