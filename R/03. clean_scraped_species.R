@@ -1,18 +1,17 @@
 ## script for cleaning the data from the abstract scrape with the COL
 
 # vector for packages to install 
-packages <- c("dplyr", "stringr", "data.table", "fuzzyjoin")
+packages <- c("dplyr", "stringr", "data.table")
 
 # packages to read in
 library(dplyr)
 library(stringr)
 library(data.table)
-library(fuzzyjoin)
 
 # source the functions R script
 source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
-### read in the csvs for taxonomic data and the scraped records
+## read in the csvs for taxonomic data and the scraped records
 
 # read abstract scrape
 all_abs <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/Abstracts/03_30644-abs_DOI_Year_Title_EID.csv", stringsAsFactors=FALSE)
@@ -36,7 +35,7 @@ unique_col$scientific_name <- unique_col$scientific_name %>%
   as.character() %>%
   trimws("r")
 
-### below for sequence of merges and cleaning at levels 1, 2, and 3 (direct, punctuation, and " spp")
+## below for sequence of merges and cleaning at levels 1, 2, and 3 (direct, punctuation, and " spp")
 
 ## merging at level 1a
 # merge those that match directly in all_records with the COL data - 7524 unique animal species and 42063 in total
