@@ -1,10 +1,9 @@
 ## scrape abstract species names from pollinat* abstracts
 
-## set up checkpoint for package versions
-library(checkpoint)
-checkpoint("2018-04-01")
+# vector for packages to install 
+packages <- c("dplyr", "taxize", "data.table")
 
-## packages
+# packages to read in
 library(dplyr)
 library(taxize)
 library(data.table)
