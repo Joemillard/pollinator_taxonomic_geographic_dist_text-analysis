@@ -1,6 +1,6 @@
-## scrape abstract species names with scrape_abs() - forms first script of Aim 1 project
+## scrape abstract species names from pollinat* abstracts
 
-## set up checkpoint for reproducibility
+## set up checkpoint for package versions
 library(checkpoint)
 checkpoint("2018-04-01")
 
