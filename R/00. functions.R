@@ -1,4 +1,4 @@
-#### will need to rerun and fix for different "taxa_data$..taxonID" column names
+### the below script is for all functions used as part of the text analysis
 
 ### scrape_abs function
 # scrape_abs() will scrape each abstract, 
