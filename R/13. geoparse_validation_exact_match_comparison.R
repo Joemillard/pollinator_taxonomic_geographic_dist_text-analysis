@@ -1,4 +1,7 @@
-### counting the number of times each string appears, as an estimate of accuracy of the geoparser
+## script for counting the number of times each string appears, as an estimate of accuracy of the geoparser
+
+# vector for packages to install 
+packages <- c("dplyr", "ggplot2", "rworldmap", "rworldxtra", "data.table", "forcats", "raster", "patchwork")
 
 ## packages
 library(dplyr)
@@ -34,6 +37,7 @@ geoparsed <- geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
 
 # select main columns 
 species_scraped <- species_scraped %>%
+  dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
   dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
 
 # subset geoparsed for those EID in species_scrape
@@ -97,12 +101,12 @@ tallied_bar <- tallied_counts %>%
   mutate(countries.j. = fct_reorder(countries.j., -n)) %>%
   mutate(countries.j. = fct_relevel(countries.j., "Rest of the world", after = Inf))
 
-############### run geoparse scripts
+## run geoparse scripts to set CLIFF-CLAVIN distributions
 
-# run for major focus 
+# run for CLIFF-CLAVIN major focus 
 geoparsed_major <- form_geoparse(data = geoparsed, foc = "major", continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")
 
-# run for minor focus
+# run for CLIFF-CLAVIN minor focus
 geoparsed_minor <- form_geoparse(data = geoparsed, foc = "minor", continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")
 
 # build map
@@ -153,7 +157,7 @@ proportion_bar[proportion_bar$rn =="Germany", 8] <- gsub("NO", "YES", proportion
 tallied_bar$germany <- "NO"
 tallied_bar[tallied_bar$countries.j. =="Germany", 4] <- gsub("NO", "YES", tallied_bar[tallied_bar$countries.j. =="Germany",  4])
 
-# draw proportion bar plot
+# draw proportion bar plot for CLIFF-CLAVIN distribution
 cliff_clavin <- ggplot(proportion_bar) +
   geom_bar(aes(x = rn , y = proportion, fill = germany), stat = "identity") + 
   ylab("Study proportion") +
@@ -169,7 +173,7 @@ cliff_clavin <- ggplot(proportion_bar) +
   scale_colour_discrete(name = "", label = "Midpoint") +
   theme(panel.grid = element_blank(), panel.background = element_rect(), axis.text.x = element_text(angle = 45, hjust = 1, size = 13), axis.title.x = element_blank(), axis.text.y = element_text(size = 13), axis.title.y = element_text(size = 13), legend.text = element_text(size = 13), legend.title = element_text(size = 13)) 
 
-# draw proportion bar plot
+# draw proportion bar plot for exact character string match distribution
 character_string <- ggplot(tallied_bar) +
   geom_bar(aes(x = countries.j. , y = n, fill = germany), stat = "identity") + 
   ylab("Study count") +
@@ -181,6 +185,7 @@ character_string <- ggplot(tallied_bar) +
   geom_text(x = 17, y = 50, label = "17th") +
   theme(panel.grid = element_blank(), panel.background = element_rect(), axis.text.x = element_text(angle = 45, hjust = 1, size = 13), axis.title.x = element_blank(), axis.text.y = element_text(size = 13), axis.title.y = element_text(size = 13), legend.text = element_text(size = 13), legend.title = element_text(size = 13)) 
 
+# use patchwork to build CLIFF-CLAVIN and character string match distributions into single figure
 cliff_clavin + character_string + plot_layout(ncol = 1)
 
 ggsave("character_string_geoparse_validation_02.png", scale = 1.5, dpi = 350)
