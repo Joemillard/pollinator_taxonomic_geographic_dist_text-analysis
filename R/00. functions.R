@@ -1,6 +1,6 @@
-### the below script is for all functions used as part of the text analysis
+##  script for all functions used as part of the text analysis
 
-### scrape_abs function
+## scrape_abs function
 # scrape_abs() will scrape each abstract, 
 # assign NA where no species are returned, 
 # merge with DOI, 
