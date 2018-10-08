@@ -43,6 +43,7 @@ unique_join <- Abstract_scrape_join %>%
 # run function for removing characters after copyright sign
 cleaned_abstracts <- remove_after_copyright(abstract = unique_join)
 
+# rename columns to simplify downstream
 cleaned_abstracts <- cleaned_abstracts %>%
   rename(abstract = abstract.Abstract.i.) %>%
   rename(EID = abstract.EID.i.)
