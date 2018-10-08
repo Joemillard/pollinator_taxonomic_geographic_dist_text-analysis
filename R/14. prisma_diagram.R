@@ -1,9 +1,14 @@
 ## script for putting together prisma meta analysis paper/species subset path
 
-## packages 
+# vector for packages to install 
+packages <- c("DiagrammeR", "DiagrammeRsvg", "rsvg", "dplyr", "stringr")
+
+# packages 
 library(DiagrammeR)
 library(DiagrammeRsvg)
 library(rsvg)
+library(dplyr)
+library(stringr)
 
 # source the functions R script
 source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
@@ -21,8 +26,7 @@ geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outp
 # read in the species scraped data
 species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
-#### set up the data calculate species, genera, and order frequencies
-
+## set up the data calculate species, genera, and order frequencies
 # select main columns 
 species_scraped <- species_scraped %>%
   dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
@@ -48,7 +52,7 @@ species_geoparsed <- inner_join(species_scraped, geoparsed, by = "EID")
 species_geoparsed <- species_geoparsed %>% dplyr::select(-X)
 species_geoparsed <- species_geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
 
-#### calculating how many genera and order after merging with geoparsed data - for PRISMA diagram
+## calculating how many genera and order after merging with geoparsed data - for PRISMA diagram
 # convert scraped data with geoparsed data to species form
 gen <- speciesify(species_geoparsed, 1, 1)
 spec <- speciesify(species_geoparsed, 1, 2)
@@ -62,6 +66,7 @@ summary(unique(spec$scientific_name))
 summary(unique(gen$scientific_name))
 summary(unique(spec$taxa_data.order.i.))
 
+## drawing the PRISMA diagram
 grViz("
       
       digraph boxes_and_circles{
