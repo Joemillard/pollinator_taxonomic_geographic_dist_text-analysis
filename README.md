@@ -4,9 +4,28 @@ This repository contains all the scripts used for the text analysis carried out 
 
 > **Millard et al (in prep.), A novel text-mining approach to quantifying the taxonomic and geographic distribution of the animal pollination literature, and implications for the systematic review**
 
-**00. functions.R** 
+There are 14 R scripts and 1 Python script in this analysis:
+00. functions.R
+01. scrape_abstracts.R
+02. clean_catologue-of-life.R
+03. clean_scraped_species.R
+04. prepare_abs_for_geoparse.R
+05. geographic_analyses.R
+06. aggregate_scraped_species.R
+07. genus_counts_histogram.R
+08. genera_change_over_time.R
+09. randomly_sample_abstracts_validation.R
+10. calculate_scrape_recall.R
+11. validation_relatedness_pollination.R
+12. geoparse_validation_maps.R
+13. geoparse_validation_exact_match_comparison.R
+14. prisma_diagram.R
 
-**01. scrape_abstracts.R**	
+## See below for brief script overviews and session info:
+
+**00. functions.R** - all functions used as part of the analysis, sourced into R scripts for analysis where appropriate
+
+**01. scrape_abstracts.R** - script 
 
 Session info
 ```
