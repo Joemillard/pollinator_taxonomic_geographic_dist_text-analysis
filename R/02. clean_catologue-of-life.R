@@ -1,10 +1,9 @@
 ## script for cleaning the COL taxonomic download - i.e. removing the author names 
 
-## set up checkpoint for package versions
-library(checkpoint)
-checkpoint("2018-04-01")
+# vector for the packages to install 
+packages <- c("dplyr", "stringr", "data.table")
 
-## packages
+# packages to read in
 library(dplyr)
 library(stringr)
 library(data.table)
