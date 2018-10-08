@@ -1,13 +1,66 @@
 ## script for putting together prisma meta analysis paper/species subset path
 
-## set up checkpoint for reproducibility
-library(checkpoint)
-checkpoint("2018-04-01")
-
 ## packages 
 library(DiagrammeR)
 library(DiagrammeRsvg)
 library(rsvg)
+
+# source the functions R script
+source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+
+# read in the geoparsed data
+geoparsed <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+
+# remove duplicates
+geoparsed <- geoparsed %>% dplyr::select(-X.U.FEFF.)
+geoparsed <- geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
+
+# read in the mistakes for geoparser and put into one column
+geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/checking_geoparsed/geoparse_check.csv", stringsAsFactors=FALSE)
+
+# read in the species scraped data
+species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+
+#### set up the data calculate species, genera, and order frequencies
+
+# select main columns 
+species_scraped <- species_scraped %>%
+  dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
+  dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
+
+# get unique species_scraped titles
+species_EID <- species_scraped %>% 
+  dplyr::filter(!duplicated(Title)) %>%
+  dplyr::select(EID) %>%
+  unique()
+
+# subset geoparsed for those EID in species_scrape
+geoparsed <- geoparsed %>%
+  dplyr::filter(EID %in% species_EID$EID)
+
+# only keep first and second word
+species_scraped$scientific_name <- species_scraped$scientific_name %>% word(1, 2)
+
+# join geoparsed with species
+species_geoparsed <- inner_join(species_scraped, geoparsed, by = "EID")
+
+# remove duplicates
+species_geoparsed <- species_geoparsed %>% dplyr::select(-X)
+species_geoparsed <- species_geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
+
+#### calculating how many genera and order after merging with geoparsed data - for PRISMA diagram
+# convert scraped data with geoparsed data to species form
+gen <- speciesify(species_geoparsed, 1, 1)
+spec <- speciesify(species_geoparsed, 1, 2)
+
+# filter out NAs for population
+gen <- gen %>% filter(!is.na(population))
+spec <- spec %>% filter(!is.na(population))
+
+# count number of species, genera, and orders
+summary(unique(spec$scientific_name))
+summary(unique(gen$scientific_name))
+summary(unique(spec$taxa_data.order.i.))
 
 grViz("
       
