@@ -1,4 +1,4 @@
-## script for cleaning the data from the full paper scrape (6303) and the assigning COL metazoa level
+## script for cleaning the data from the abstract scrape with the COL
 
 ## set up checkpoint for reproducibility
 library(checkpoint)
@@ -37,7 +37,7 @@ unique_col$scientific_name <- unique_col$scientific_name %>%
   as.character() %>%
   trimws("r")
 
-### below for sequence of merges and cleaning at levels 1, 2, and 3 (direct, punctuation, and " spp")  - none returned for digits ###
+### below for sequence of merges and cleaning at levels 1, 2, and 3 (direct, punctuation, and " spp")
 
 ## merging at level 1a
 # merge those that match directly in all_records with the COL data - 7524 unique animal species and 42063 in total
@@ -46,16 +46,11 @@ direct_merge <- direct_merge %>%
   select(scientific_name, taxa_data.kingdom.i., taxa_data.class.i., taxa_data.order.i., File_loc, Year, original, taxa_data.scientificNameAuthorship.i., Title, EID, taxa_data.family.i., taxa_data...taxonID.i., taxa_data.acceptedNameUsageID.i., taxa_data.parentNameUsageID.i., taxa_data.taxonomicStatus.i.) %>%
   mutate(level = "1a")
 
-# 42063 in total merged at level 1a
-
 # subset out those merged with the COL data at level 1 
 remainder_1 <- left_join(all_records, unique_col, by = "scientific_name")
 remainder_1 <- remainder_1 %>%
   filter(is.na(taxa_data.kingdom.i.)) %>%
   select(scientific_name, File_loc, Year, original, Title, EID)
-
-# 652156 in total following merge at level 1a
-
 
 ## merging at level 1b
 # remove any punctuation from string - 157 unique animals and 267 in total
@@ -64,16 +59,11 @@ punc_merge <- inner_join(unique_col, remainder_1, by = "scientific_name")
 punc_merge <- punc_merge %>%
   mutate(level = "1b")
 
-# 267 in total merged at level 1b
-
 # subset out those merged with the COL data at level 1b
 remainder_2 <- left_join(remainder_1, unique_col, by = "scientific_name")
 remainder_2 <- remainder_2 %>%
   filter(is.na(taxa_data.kingdom.i.)) %>%
   select(scientific_name, File_loc, Year, original, Title, EID)
-
-# 651889 following merge at level 1b
-
 
 ## merging at level 1c
 # remove " spp"
@@ -82,19 +72,14 @@ spp_merge <- inner_join(unique_col, remainder_2, by = "scientific_name")
 spp_merge <- spp_merge %>%
   mutate(level = "1c")
 
-# 4 in total merged at level 1c
-
 # subset out those merged with the COL data at level 3
 remainder_3 <- left_join(remainder_2, unique_col, by = "scientific_name")
 remainder_3 <- remainder_3 %>%
   filter(is.na(taxa_data.kingdom.i.))
 
-# 651855 following merge at level 1c
-
 ## bind all the match records from levels 1, 2, and 3 - 42063 + 267 + 4 = 42334; 7584 unique animals
 level_1 <- rbind(direct_merge, punc_merge, spp_merge)
 level_1$level <- factor(level_1$level)
-
 
 ## merging at level 2b - abbreviated species
 # extract second word of species string in COL
