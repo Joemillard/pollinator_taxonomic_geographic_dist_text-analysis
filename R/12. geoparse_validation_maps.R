@@ -1,9 +1,13 @@
-### packages
+## script for validation of geoparse locations against manual scrape of 100 abstracts
+
+# vector for packages to install 
+packages <- c("dplyr", "ggplot2", "rworldmap", "rworldxtra")
+
+## packages
 library(ggplot2)
 library(dplyr)
 library(rworldmap)
 library(rworldxtra)
-library(spatstat)
 
 # source the functions R script
 source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
@@ -53,25 +57,7 @@ base_map <- get_basemap()
 # fortify the main map
 map_fort <- fortify(base_map)
 
-### build the plot - for all papers broken down by colour for automation type
-geoparse_valid <- ggplot() + 
-  geom_polygon(aes(x = long, y = lat, group = group), 
-               data = map_fort, fill = "lightgrey") +
-  geom_point(aes(x = long, y = lat, colour = type), 
-             data = bound_geodata,  alpha = 0.4) +
-  facet_wrap(~EID) +
-  scale_size_area(name = "Mentions") +
-  scale_colour_discrete(name = "Extraction method") +
-  coord_map(projection = "mollweide") +
-  theme(axis.text = element_blank(), 
-        axis.ticks = element_blank(), 
-        axis.title = element_blank(),
-        axis.line = element_blank(),
-        panel.background = element_rect(fill = "white"))
-
-ggsave("geoparse_validation_all-papers.png", scale = 1.3, dpi = 350)
-
-### build the plot - two facets for automatic and manual
+## build the plot - two facets for automatic and manual
 geoparse_valid <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = group), 
                data = map_fort, fill = "lightgrey") +
