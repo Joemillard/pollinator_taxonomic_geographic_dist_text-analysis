@@ -26,7 +26,7 @@ There are 14 R scripts and 1 Python script in this analysis:
 
 **00. functions.R** - all functions used as part of the analysis, sourced into R scripts for analysis where appropriate
 
-**01. scrape_abstracts.R** - script 
+**01. scrape_abstracts.R** - scrapes potential taxonomic records from abstracts using scrapenames() in the taxize package
 
 Session info
 ```
@@ -56,7 +56,7 @@ loaded via a namespace (and not attached):
 
 ```
 ---
-**02. clean_catologue-of-life.R**	
+**02. clean_catologue-of-life.R** - removes author information from the scientific names column for string matches in 03.
 
 Session info
 ```
@@ -82,7 +82,7 @@ loaded via a namespace (and not attached):
 [15] bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2    
 ```
 ---
-**03. clean_scraped_species.R**
+**03. clean_scraped_species.R** - identifies animal species records in the initial scrape using matches with the COL
 
 Session info
 ```
@@ -108,7 +108,7 @@ loaded via a namespace (and not attached):
 [15] bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2
 ```
 ---
-**04. prepare_abs_for_geoparse.R**
+**04. prepare_abs_for_geoparse.R** - abstract csv prepared for geoparsing with CLIFF-CLAVIN
 
 Session info
 ```
@@ -134,7 +134,7 @@ loaded via a namespace (and not attached):
 [15] tidyselect_0.2.4 tibble_1.4.2
 ```
 ---
-**05. geographic_analyses.R**
+**05. geographic_analyses.R** - all mapping and country distribution figures following CLIFF-CLAVIN geoparse
 
 Session info
 ```
@@ -163,7 +163,7 @@ loaded via a namespace (and not attached):
 [29] stringi_1.1.7    lazyeval_0.2.1   munsell_0.5.0    crayon_1.3.4
 ```
 ---
-**06. aggregate_scraped_species.R**
+**06. aggregate_scraped_species.R** - aggregation of confirmed animal species at the level of taxonomic record and DOI
 
 Session info
 ```
@@ -189,7 +189,7 @@ loaded via a namespace (and not attached):
 [15] compiler_3.5.1   pkgconfig_2.0.2  bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2
 ```
 ---
-**07. genus_counts_histogram.R**
+**07. genus_counts_histogram.R** - scripts for building genera and order level distribution for confirmed scraped animal species
 
 Session info
 ```
@@ -216,7 +216,7 @@ loaded via a namespace (and not attached):
 [22] stringi_1.1.7    compiler_3.5.1   pillar_1.3.0     scales_1.0.0     pkgconfig_2.0.2
 ```
 ---
-**08. genera_change_over_time.R**
+**08. genera_change_over_time.R** - scripts for quantifying change over time for Apis, Bombus, and all other genera
 
 Session info
 ```
@@ -243,7 +243,7 @@ loaded via a namespace (and not attached):
 [22] glue_1.3.0       stringi_1.1.7    compiler_3.5.1   pillar_1.3.0     scales_1.0.0     pkgconfig_2.0.2
 ```
 ---
-**09. randomly_sample_abstracts_validation.R**
+**09. randomly_sample_abstracts_validation.R** - randomly sample abstracts for validation
 
 Session info
 ```
@@ -269,7 +269,7 @@ loaded via a namespace (and not attached):
 [15] bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2    
 ```
 ---
-**10. calculate_scrape_recall.R**
+**10. calculate_scrape_recall.R** - scripts for comparing manual scrape of abstracts for taxonomic records with the programmatic approach
 
 Session info
 ```
@@ -295,7 +295,7 @@ loaded via a namespace (and not attached):
 [15] pkgconfig_2.0.2  bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2
 ```
 ---
-**11. validation_relatedness_pollination.R**
+**11. validation_relatedness_pollination.R** - script for constructing relatedness to polliantion figures
 
 Session info
 ```
@@ -322,7 +322,7 @@ loaded via a namespace (and not attached):
 [22] compiler_3.5.1   pillar_1.3.0     scales_1.0.0     pkgconfig_2.0.2
 ```
 ---
-**12. geoparse_validation_maps.R**
+**12. geoparse_validation_maps.R** - script for constructing geoparse automated/manual validation map figure
 
 Session info
 ```
@@ -350,7 +350,7 @@ loaded via a namespace (and not attached):
 [29] pillar_1.3.0     scales_1.0.0     foreign_0.8-70   pkgconfig_2.0.2
 ```
 ---
-**13. geoparse_validation_exact_match_comparison.R**
+**13. geoparse_validation_exact_match_comparison.R** - script for building figure to compare CLIFF-CLAVIN with character string matches
 
 Session info
 ```
@@ -379,7 +379,7 @@ loaded via a namespace (and not attached):
 [29] colorspace_1.3-2 lazyeval_0.2.1   munsell_0.5.0    crayon_1.3.4
 ```
 ---
-**14. prisma_diagram.R**
+**14. prisma_diagram.R** - script for building PRISMA diagram of paper, species, genera, and order number
 
 Session info
 ```
