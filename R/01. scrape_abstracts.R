@@ -9,10 +9,7 @@ library(taxize)
 library(data.table)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/functions.R")
-
-## read in the scopus download (TEST) ####
-scopus_download <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/Test/2000 records - pollinat, English, articles.csv", stringsAsFactors = F)
+source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
 ## read in the full Scopus download and set up data - 30,664 articles; pollinat*, English, Articles ####
 pollinat_2018 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/01-2018_pollinat_English_articles.csv", stringsAsFactors=FALSE)
