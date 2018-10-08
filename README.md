@@ -31,7 +31,7 @@ loaded via a namespace (and not attached):
 [36] stringi_1.1.7    crayon_1.3.4     zoo_1.8-4  
 
 ```
-
+---
 **02. clean_catologue-of-life.R**	
 
 Session info
@@ -57,27 +57,38 @@ loaded via a namespace (and not attached):
  [8] rlang_0.2.2      rstudioapi_0.8   tools_3.5.1      glue_1.3.0       purrr_0.2.5      compiler_3.5.1   pkgconfig_2.0.2 
 [15] bindr_0.1.1      tidyselect_0.2.4 tibble_1.4.2    
 ```
-
+---
 **03. clean_scraped_species.R**
 
+---
 **04. prepare_abs_for_geoparse.R**	
 
+---
 **05. geographic_analyses.R**
 
+---
 **06. aggregate_scraped_species.R**
 
+---
 **07. genus_counts_histogram.R**
 
+---
 **08. genera_change_over_time.R**
 
+---
 **09. randomly_sample_abstracts_validation.R**
 
+---
 **10. calculate_scrape_recall.R**
 
+---
 **11. validation_relatedness_pollination.R**
 
+---
 **12. geoparse_validation_maps.R**
 
+---
 **13. geoparse_validation_exact_match_comparison.R**
 
+---
 **14. prisma_diagram.R**
