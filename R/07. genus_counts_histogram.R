@@ -1,13 +1,12 @@
-## plotting of genus counts as histogram
+## script for plotting genus counts as histogram
+
+# vector for the packages to install 
+packages <- c("dplyr", "ggplot2", "forcats", "stringr", "patchwork")
 
 # packages
 library(dplyr)
 library(ggplot2)
 library(forcats)
-library(viridis)
-library(rphylopic)
-library(brranching)
-library(ggtree)
 library(stringr)
 library(patchwork)
 
@@ -70,7 +69,7 @@ colour_palette <- c("#009E73", "#999999" , "#56B4E9", "#E69F00", "#F0E442", "#00
 
 # remove all columns bar the EID and order, and then unique
 order_counts <- order_counts %>%
-  select(EID, taxa_data.order.i.) %>%
+  dplyr::select(EID, taxa_data.order.i.) %>%
   group_by(EID) %>%
   unique() %>%
   ungroup()
