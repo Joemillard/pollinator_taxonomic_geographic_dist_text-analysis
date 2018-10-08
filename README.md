@@ -1,4 +1,6 @@
-# Scripts for pollinator taxonomic and geographic distribution analysis
+# Quantifying the taxonomic and geographic distribution of the animal pollination literature
+
+This repository contains all the scripts used for the text analysis carried out in **Millard et al (in prep.), A novel text-mining approach to quantifying the taxonomic and geographic distribution of the animal pollination literature, and implications for the systematic review**
 
 **00. functions.R** 
 
