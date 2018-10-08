@@ -1,4 +1,7 @@
-# random sampling of abstracts for checking of animal species recall and precision
+## script for random sampling of abstracts for checking of animal species recall and precision
+
+# vector for the packages to install 
+packages <- c("dplyr")
 
 # packages
 library(dplyr)

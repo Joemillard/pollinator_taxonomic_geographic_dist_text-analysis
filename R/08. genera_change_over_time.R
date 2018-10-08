@@ -1,7 +1,7 @@
 ## script for average change over time at the level of genus
 
 # vector for the packages to install 
-packages <- c("dplyr", "stringr", "reshape2", "ggplot2", "forcats", "AER")
+packages <- c("dplyr", "stringr", "reshape2", "ggplot2", "forcats", "viridis")
 
 # packages 
 library(dplyr)

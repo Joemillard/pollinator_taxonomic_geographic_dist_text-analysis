@@ -1,12 +1,14 @@
 ## script for checking the species scraper against manually checked abstracts to return recall
 
+# vector for the packages to install 
+packages <- c("dplyr", "stringr")
+
 # packages
 library(dplyr)
 library(stringr)
 
-# websites used for taxonomic accepted name
-# http://www.discoverlife.org
-# catalogue of life
+## website used for taxonomic accepted name
+# http://www.discoverlife.org - catalogue of life
 
 # read in the manual scrape
 manual_scrape <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/validation/300_random-abstracts_manual-scrape.csv")

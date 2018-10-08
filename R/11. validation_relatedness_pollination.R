@@ -1,9 +1,10 @@
-#### set up csv for checking relatedness of abstracts to pollination
+## script for setting up csv for checking relatedness of abstracts to pollination
+
+# vector for the packages to install 
+packages <- c("dplyr", "ggplot2", "patchwork")
 
 # packages
 library(dplyr)
-library(tm)
-library(SnowballC)
 library(ggplot2)
 library(patchwork)
 
@@ -28,7 +29,8 @@ set.seed(20)
 scopus_filtered <-  scopus_filtered[sample(nrow(scopus_filtered), 100),]
 
 # write to csv goes here for manual check of relatedness, then carry out manual edit for paper types 
-### build figure for proportion
+
+## build figure for proportion
 
 # read in csv
 abstract_relatedness <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/validation/100-abstracts_pollination-relatedness-check_manual-edit.csv", stringsAsFactors = TRUE)
