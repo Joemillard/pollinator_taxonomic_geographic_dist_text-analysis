@@ -1,21 +1,16 @@
-## scripts for building maps and country level distribution histogram
+#### scripts for building maps and country level distribution histogram
+
+# vector for packages to install
+packages <- c("dplyr", "rworldmap", "rworldxtra", "ggplot2", "patchwork", "raster", "mapproj", "forcats", "plyr", "data.table")
 
 # packages to read in
 library(dplyr)
 library(rworldmap)
 library(rworldxtra)
 library(ggplot2)
-library(sp)
 library(data.table)
-library(rgdal)
 library(raster)
-library(ggforce)
-library(digest)
 library(forcats)
-library(gridExtra)
-library(grid)
-library(ggExtra)
-library(gganimate)
 library(stringr)
 library(plyr)
 library(patchwork)
@@ -36,8 +31,11 @@ geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outp
 # read in the species scraped data
 species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
+#### set up the data for the first density map and country histogram
+
 # select main columns 
 species_scraped <- species_scraped %>%
+  dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
   dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
 
 # get unique species_scraped titles
@@ -87,7 +85,7 @@ area_within$ratio <- area_within$within_all/area_within$area
 # join records to main map
 within_map <- inner_join(area_within, map_fort, by = c("rn" = "id"))
 
-# build the map - this one is log of studies per km, wtih minor mentions
+# build the map - this one is log of studies per km, with minor mentions
 density_map <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = group, fill = log10(ratio)), 
                data = within_map) +
@@ -114,7 +112,7 @@ density_map <- ggplot() +
 # save the plot
 ggsave("abstract_geoparse-major-minor_ratio_13.png", dpi = 380, scale = 1.5)
 
-# build bar plot for country proportions
+#### build bar plot frequencies for country proportions
 proportion_bar <- area_within %>% 
   filter(proportion > 0.014) %>%
   summarise(rn = "Rest of the world",
@@ -148,17 +146,7 @@ ggplot(proportion_bar) +
 # save the plot
 ggsave("abstract_geoparse_study-proportion-7.png", dpi = 380, scale = 1.5)
 
-# map facetted by taxonomic group -------------------------------------------------
-
-####### calculating how many genera and order after merging with geoparsed data - for PRISMA diagram
-gen <- speciesify(species_geoparsed, 1, 1)
-gen <- spec %>% filter(!is.na(population))
-spec <- speciesify(species_geoparsed, 1, 2)
-spec <- spec %>% filter(!is.na(population))
-summary(unique(spec$scientific_name))
-summary(unique(spec$taxa_data.order.i.))
-
-#######
+#### map facetted by taxonomic group - set up the data
 
 # run for major focus
 spec_geoparsed_major <- form_geoparse(data = species_geoparsed, foc = "major", continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")
@@ -218,6 +206,7 @@ count_freq <- count_frequency(data = spec_geoparsed_minor, x_value = -170, y_val
 # convert year to factor
 spec_geoparsed_minor$Year <- factor(spec_geoparsed_minor$Year)
 
+# rename the factor for simplicity
 spec_geoparsed_minor$scientific_name <- revalue(spec_geoparsed_minor$scientific_name, c("Other" = "Other genera"))
 
 # filter out the other genera and build new plot
@@ -228,7 +217,7 @@ spec_geoparsed_other <- spec_geoparsed_minor %>%
 spec_geoparsed_minor <- spec_geoparsed_minor %>%
   filter(scientific_name != "Other genera")
 
-# main facet for other genera --------------------------------------------
+#### main facet for other genera - build the map
 
 other_map <- ggplot() + 
   geom_polygon(aes(x = long, y = lat, group = group), 
@@ -247,7 +236,7 @@ other_map <- ggplot() +
         legend.key = element_rect(colour = NA, fill = NA), 
         strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm")))
 
-# Facet by key taxonomic group --------------------------------------------
+#### Facet by key taxonomic group - build the secondary facets
 
 # static plot
 taxonomy_map <- ggplot() + 
