@@ -1,10 +1,7 @@
-# script for aggregating data assigned to country level for all scrape - creating one dataset with DOIs and species as a character string; 
-# and one with species and DOI as character string
-# - IMPORTANT - if come to use this for checking papers, will want to remove continental and oddity mentions?
+## script for aggregating data at the level of DOI and taxonomic recod
 
-# set up checkpoint
-library(checkpoint)
-checkpoint("2018-05-03")
+# vector for the packages to install 
+packages <- c("dplyr", "reshape2", "stringr", "data.table")
 
 # packages
 library(dplyr)

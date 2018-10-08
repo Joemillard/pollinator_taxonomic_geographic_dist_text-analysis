@@ -1,11 +1,9 @@
-# script for preparing abstracts for geoparsing with CLIFF-CLAVIN prep - 27/05/2018
+## script for preparing abstracts for geoparsing with CLIFF-CLAVIN prep
 
-# set up checkpoint
-library(checkpoint)
-checkpoint("2018-05-03")
+# vector for the packages to install 
+packages <- c("dplyr", "stringi", "data.table")
 
-# packages
-library(geoparser)
+# packages to read in
 library(dplyr)
 library(data.table)
 library(stringi)

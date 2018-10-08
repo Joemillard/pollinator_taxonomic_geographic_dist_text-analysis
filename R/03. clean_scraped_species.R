@@ -1,10 +1,9 @@
 ## script for cleaning the data from the abstract scrape with the COL
 
-## set up checkpoint for reproducibility
-library(checkpoint)
-checkpoint("2018-04-01")
+# vector for packages to install 
+packages <- c("dplyr", "stringr", "data.table", "fuzzyjoin")
 
-## packages
+# packages to read in
 library(dplyr)
 library(stringr)
 library(data.table)
