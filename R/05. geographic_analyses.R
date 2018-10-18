@@ -4,6 +4,7 @@
 packages <- c("dplyr", "rworldmap", "rworldxtra", "ggplot2", "patchwork", "raster", "mapproj", "forcats", "plyr", "data.table")
 
 # packages to read in
+library(plyr)
 library(dplyr)
 library(rworldmap)
 library(rworldxtra)
@@ -12,7 +13,6 @@ library(data.table)
 library(raster)
 library(forcats)
 library(stringr)
-library(plyr)
 library(patchwork)
 
 # source the functions R script
