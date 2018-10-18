@@ -3,8 +3,7 @@
 # vector for packages to install
 packages <- c("dplyr", "rworldmap", "rworldxtra", "ggplot2", "patchwork", "raster", "mapproj", "forcats", "plyr", "data.table")
 
-# packages to read in
-library(plyr)
+# packages to read in - plyr called in for revalue to avoid package conflicts
 library(dplyr)
 library(rworldmap)
 library(rworldxtra)
@@ -206,7 +205,7 @@ count_freq <- count_frequency(data = spec_geoparsed_minor, x_value = -170, y_val
 spec_geoparsed_minor$Year <- factor(spec_geoparsed_minor$Year)
 
 # rename the factor for simplicity
-spec_geoparsed_minor$scientific_name <- revalue(spec_geoparsed_minor$scientific_name, c("Other" = "Other genera"))
+spec_geoparsed_minor$scientific_name <- plyr::revalue(spec_geoparsed_minor$scientific_name, c("Other" = "Other genera"))
 
 # filter out the other genera and build new plot
 spec_geoparsed_other <- spec_geoparsed_minor %>%
