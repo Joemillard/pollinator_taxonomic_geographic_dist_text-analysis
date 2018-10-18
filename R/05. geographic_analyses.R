@@ -105,10 +105,11 @@ density_map <- ggplot() +
         axis.ticks = element_blank(), 
         axis.title = element_blank(),
         axis.line = element_blank(),
+        text = element_text(size = 12),
         panel.background = element_rect(fill = "white"))
 
 # save the plot
-ggsave("abstract_geoparse-major-minor_ratio_13.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse-major-minor_ratio_14.png", dpi = 380, scale = 1.5)
 
 ## build bar plot frequencies for country proportions
 proportion_bar <- area_within %>% 
@@ -228,10 +229,11 @@ other_map <- ggplot() +
   theme(axis.text = element_blank(), 
         axis.ticks = element_blank(), 
         axis.title = element_blank(), 
+        text = element_text(size = 12),
         panel.background = element_rect(fill = "white"), 
         legend.position = "right",
         legend.key = element_rect(colour = NA, fill = NA), 
-        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm")))
+        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm"), size = 12))
 
 ## Facet by key taxonomic group - build the secondary facets
 # static plot
@@ -248,12 +250,13 @@ taxonomy_map <- ggplot() +
   theme(axis.text = element_blank(), 
         axis.ticks = element_blank(), 
         axis.title = element_blank(), 
+        text = element_text(size = 12),
         panel.background = element_rect(fill = "white"), legend.position = "right",
         legend.key = element_rect(colour = NA, fill = NA), 
-        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm")))
+        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm"), size = 12))
 
 # combine the plots
 taxonomy_map + other_map + plot_layout(ncol = 1)
 
 # save the plot
-ggsave("abstract_geoparse-taxonomic-group_21.png", dpi = 380, scale = 1.6)
+ggsave("abstract_geoparse-taxonomic-group_23.png", dpi = 380, scale = 1.6)
