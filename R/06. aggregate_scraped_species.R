@@ -28,9 +28,6 @@ species_EID <- species_scraped %>%
 geoparsed <- geoparsed %>%
   dplyr::filter(EID %in% species_EID$EID)
 
-# read in the mistakes for geoparser and put into one column
-geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/checking_geoparsed/geoparse_check.csv", stringsAsFactors=FALSE)
-
 # join the scraped data and the geoparsed data by EID
 scrape_join <- inner_join(geoparsed, species_scraped, by = "EID")
 
