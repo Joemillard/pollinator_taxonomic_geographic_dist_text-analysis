@@ -128,19 +128,25 @@ ggplot() +
   scale_y_continuous(breaks = c(0, 20, 40, 60, 80, 100, 120, 140), limits = c(-2, 150), expand = c(0, 0.5)) +
   theme_bw() +
   scale_colour_manual(values = c("red", "black", "black"), labels = c("Apis", "Bombus", "Other"), breaks = c("Apis", "Bombus", "Other")) +
-  theme(panel.grid = element_blank(), legend.key.size = unit(1.5, 'lines'), strip.text.x = element_text(size = 12), legend.position = "bottom", legend.title = element_text(size = 12, hjust = 1, vjust = 0.75)) +
+  theme(panel.grid = element_blank(), 
+        legend.key.size = unit(1.5, 'lines'), 
+        strip.text.x = element_text(size = 12), 
+        legend.position = "bottom", 
+        legend.title = element_text(size = 12, hjust = 1, vjust = 0.75),
+        text = element_text(size = 15)) +
   guides(colour = FALSE)
 
-ggsave("top_10_genus_yearly-change-10.png", dpi = 350, scale = 1.5)
+ggsave("top_10_genus_yearly-change-13.png", dpi = 350, scale = 1.5)
 
 # overall change for pollination studies
 ggplot(joined_species) + 
   geom_bar(aes(x = variable, y = value.x), stat = "identity") +
-  theme_bw() +
-  theme(panel.grid = element_blank()) +
   ylab("Annual study count") + 
   scale_y_continuous(limits = c(0, 760), expand = c(0, 0)) +
   xlab("Year") +
-  scale_x_continuous(breaks = c(1960, 1970, 1980, 1990, 2000, 2010))
+  scale_x_continuous(breaks = c(1960, 1970, 1980, 1990, 2000, 2010)) +
+  theme_bw() +
+  theme(panel.grid = element_blank(),
+        text = element_text(size = 14))
 
-ggsave("overall-pollination-studies-change.png", dpi = 350, scale = 1.1)
+ggsave("overall-pollination-studies-change_03.png", dpi = 350, scale = 1.1)
