@@ -140,10 +140,16 @@ ggplot(proportion_bar) +
   theme_bw() +
   geom_vline(aes(xintercept = 5.5, colour = "red"), linetype = "dashed") +
   scale_colour_discrete(name = "", label = "Midpoint") +
-  theme(panel.grid = element_blank(), panel.background = element_rect(), axis.text.x = element_text(angle = 45, hjust = 1, size = 13), axis.title.x = element_blank(), axis.text.y = element_text(size = 13), axis.title.y = element_text(size = 13), legend.text = element_text(size = 13), legend.title = element_text(size = 13)) 
+  theme(panel.grid = element_blank(), 
+        panel.background = element_rect(), 
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 15), 
+        axis.title.x = element_blank(), axis.text.y = element_text(size = 15), 
+        axis.title.y = element_text(size = 15), 
+        legend.text = element_text(size = 15), 
+        legend.title = element_text(size = 15)) 
 
 # save the plot
-ggsave("abstract_geoparse_study-proportion-7.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse_study-proportion-8.png", dpi = 380, scale = 1.5)
 
 ## map facetted by taxonomic group - set up the data
 
