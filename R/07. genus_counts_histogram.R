@@ -143,9 +143,10 @@ hym <- ggplot(genus_counts_hym) +
   facet_wrap(~unique_order) +
   scale_fill_discrete(name = "Taxonomic family") +
   scale_y_continuous(limits = c(0, 150), expand = c(0, 0)) +
-  theme(panel.grid.major.x = element_blank(), panel.background = element_rect(), text = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 1))
-
-ggsave("Taxonomic_breakdown_hymenoptera.png", dpi = 350, scale = 1.5)
+  theme(panel.grid.major.x = element_blank(), 
+        panel.background = element_rect(), 
+        text = element_text(size = 12), 
+        axis.text.x = element_text(angle = 45, hjust = 1))
 
 ########## supplementary figures - breakdown of the top 3 genera, plus other for each order
 # select the main orders
@@ -190,9 +191,13 @@ other_filt <- ggplot(genus_sep_filt) +
   ylab("") +
   theme_bw() +
   guides(fill = FALSE) +
-  scale_y_continuous(limits = c(0, 50), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 50), expand = c(0, 0), breaks = c(0, 20, 40)) +
   scale_fill_manual(name = "Taxonomic orders", values = c("#CC79A7", "#E69F00", "#009E73", "#999999", "black",  "#56B4E9", "#F0E442", "#D55E00"),  na.value = "grey") +
-  theme(panel.grid.major.x = element_blank(), panel.grid.minor.y = element_blank(), panel.background = element_rect(), text = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(panel.grid.major.x = element_blank(), 
+        panel.grid.minor.y = element_blank(), 
+        panel.background = element_rect(), 
+        text = element_text(size = 12), 
+        axis.text.x = element_text(angle = 45, hjust = 1))
 
 hym + other_filt + plot_layout(ncol = 1)
 
