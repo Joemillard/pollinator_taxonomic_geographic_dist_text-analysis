@@ -44,6 +44,11 @@ ggplot(abstract_relatedness) +
   ylab("Percentage") +
   theme_bw() +
   scale_fill_manual(values = c("blue", "white", "black"), name = "Study type", labels = c("Other", "Status/disturbance", "General pollination")) +
-  theme(axis.text.x = element_blank(), axis.title.x = element_blank(), axis.ticks.x = element_blank(), panel.grid = element_blank(), plot.margin = margin(0.5, 10, 0.5, 1, "cm"), text = element_text(size = 13))
+  theme(axis.text.x = element_blank(), 
+        axis.title.x = element_blank(), 
+        axis.ticks.x = element_blank(), 
+        panel.grid = element_blank(), 
+        plot.margin = margin(0.5, 10, 0.5, 1, "cm"), 
+        text = element_text(size = 15))
 
-ggsave("study-type-validation-05.png", scale = 1.4, dpi = 350)
+ggsave("study-type-validation-06.png", scale = 1.3, dpi = 350)
