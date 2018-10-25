@@ -10,8 +10,8 @@ There are 14 R scripts and 1 Python script in this analysis:
 01. scrape_abstracts.R
 02. clean_catologue-of-life.R
 03. clean_scraped_species.R
-04. prepare_abs_for_geoparse.R
-04a. run_cliff-clavin.py
+04. prepare_abs_for_geoparse.R \newline
+4a. run_cliff-clavin.py
 05. geographic_analyses.R
 06. aggregate_scraped_species.R
 07. genus_counts_histogram.R
