@@ -171,7 +171,14 @@ cliff_clavin <- ggplot(proportion_bar) +
   geom_vline(aes(xintercept = 5.5, colour = "red"), linetype = "dashed") +
   scale_fill_manual(values = c("black", "red"))+
   scale_colour_discrete(name = "", label = "Midpoint") +
-  theme(panel.grid = element_blank(), panel.background = element_rect(), axis.text.x = element_text(angle = 45, hjust = 1, size = 13), axis.title.x = element_blank(), axis.text.y = element_text(size = 13), axis.title.y = element_text(size = 13), legend.text = element_text(size = 13), legend.title = element_text(size = 13)) 
+  theme(panel.grid = element_blank(), 
+        panel.background = element_rect(), 
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
+        axis.title.x = element_blank(), 
+        axis.text.y = element_text(size = 14), 
+        axis.title.y = element_text(size = 14), 
+        legend.text = element_text(size = 14), 
+        legend.title = element_text(size = 14)) 
 
 # draw proportion bar plot for exact character string match distribution
 character_string <- ggplot(tallied_bar) +
@@ -183,7 +190,14 @@ character_string <- ggplot(tallied_bar) +
   ggtitle("Character string match") +
   scale_fill_manual(values = c("black", "red"))+
   geom_text(x = 17, y = 50, label = "17th") +
-  theme(panel.grid = element_blank(), panel.background = element_rect(), axis.text.x = element_text(angle = 45, hjust = 1, size = 13), axis.title.x = element_blank(), axis.text.y = element_text(size = 13), axis.title.y = element_text(size = 13), legend.text = element_text(size = 13), legend.title = element_text(size = 13)) 
+  theme(panel.grid = element_blank(), 
+        panel.background = element_rect(), 
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 14), 
+        axis.title.x = element_blank(), 
+        axis.text.y = element_text(size = 14), 
+        axis.title.y = element_text(size = 14), 
+        legend.text = element_text(size = 14), 
+        legend.title = element_text(size = 14)) 
 
 # use patchwork to build CLIFF-CLAVIN and character string match distributions into single figure
 cliff_clavin + character_string + plot_layout(ncol = 1)
