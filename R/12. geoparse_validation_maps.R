@@ -71,6 +71,7 @@ geoparse_valid <- ggplot() +
         axis.ticks = element_blank(), 
         axis.title = element_blank(),
         axis.line = element_blank(),
-        panel.background = element_rect(fill = "white"))
+        panel.background = element_rect(fill = "white"),
+        text = element_text(size = 15))
 
-ggsave("geoparse_validation_auto-manual-02.png", scale = 1.3, dpi = 350)
+ggsave("geoparse_validation_auto-manual-03.png", scale = 1.3, dpi = 350)
