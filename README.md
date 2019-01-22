@@ -2,7 +2,9 @@
 
 This repository contains all the scripts used for the text analysis carried out in the below review:
 
-> **Millard et al (in prep.), A novel text-mining approach to quantifying the taxonomic and geographic distribution of the animal pollination literature, and implications for the systematic review**
+> **Millard et al (in prep.), Text-analysis reveals taxonomic and geographic disparities in animal pollination literature**
+
+Please note that this repository is not written to be fully reproducible - contact Joe for any queries
 
 There are 14 R scripts and 1 Python script in this analysis:
 
