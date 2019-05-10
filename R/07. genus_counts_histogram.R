@@ -16,6 +16,17 @@ genus_counts <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Output
 # read in the raw scraped data
 order_counts <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
 
+# read in the pollinator confirmation file
+species_confirmation <- read.csv("~/PhD/Aims/Aim 2 - understand response to environmental change/Data/global clade extrapolation/global_polllinating_confirmation_manual-edit.csv", stringsAsFactors = FALSE)
+
+# subset species_confirmation for those confirmed as pollinators
+species_confirmation <- species_confirmation %>%
+  filter(Pollinating.evidence.reference == "Y")
+
+# only keep first and second word in extra genera column
+order_counts$generas <- order_counts$scientific_name %>% word(1, 1)
+confirmed <- species_confirmation$aggregated.scientific_name.i
+
 # get unique species_scraped titles
 species_EID <- order_counts %>% 
   dplyr::filter(!duplicated(Title)) %>%
@@ -25,6 +36,15 @@ species_EID <- order_counts %>%
 # subset orders for those not duplicated
 order_counts <- order_counts %>%
   dplyr::filter(EID %in% species_EID$EID)
+
+# filter for confirmed pollinators and then remove the generas column
+order_counts <- order_counts %>%
+  dplyr::filter(generas %in% confirmed) %>%
+  dplyr::select(-generas)
+
+# filter for confirmed pollinators and then remove the generas column
+genus_counts <- genus_counts %>%
+  dplyr::filter(aggregated.scientific_name.i. %in% confirmed)
 
 # calculate total number of studies
 genus_counts$total <- sum(genus_counts$DOI_count)
@@ -40,6 +60,9 @@ proportion_bar <- genus_counts %>%
   bind_rows(filter(genus_counts, DOI_count > 40)) %>%
   mutate(aggregated.scientific_name.i. = fct_reorder(aggregated.scientific_name.i., -percent),
          aggregated.scientific_name.i. = fct_relevel(aggregated.scientific_name.i., "Other", after = Inf))
+
+# order the factors by size
+proportion_bar$unique_order <- factor(proportion_bar$unique_order, levels = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Rodentia", "Other"))
 
 # remove those from other with greater than or equal to 40 studies
 proportion_other <- genus_counts %>% 
@@ -63,7 +86,7 @@ proportion_smallest <- as.character(proportion_smallest_other$unique_order)
 proportion_other$unique_order <- fct_collapse(proportion_other$unique_order, Other = proportion_smallest)
 
 # colour palette for the plot
-colour_palette <- c("#009E73", "#999999" , "#56B4E9", "#E69F00", "#F0E442", "#0072B2",  "#CC79A7","#D55E00", "black")
+colour_palette <- c("#009E73", "#999999" , "#56B4E9", "#E69F00", "#0072B2", "#CC79A7", "#D55E00", "black")
 
 ##### breakdown of genus_counts into seperate orders
 
@@ -84,13 +107,13 @@ order_no <- order_counts %>%
 number_orders <- order_no %>% group_by(taxa_data.order.i.) %>% tally()
 
 # select the main orders
-main_orders <- c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Passeriformes", "Chiroptera", "Coleoptera", "Hemiptera")
+main_orders <- c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Passeriformes", "Chiroptera", "Coleoptera")
 
 # collapse everything else into a single other group
 order_counts$taxa_data.order.i. <- order_counts$taxa_data.order.i.  %>% fct_collapse(Other = order_counts$taxa_data.order.i.[!order_counts$taxa_data.order.i. %in% main_orders])
 
 # order the factors by size
-order_counts$taxa_data.order.i. <- factor(order_counts$taxa_data.order.i., levels = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Hemiptera", "Other"))
+order_counts$taxa_data.order.i. <- factor(order_counts$taxa_data.order.i., levels = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Rodentia", "Other"))
 
 ##### draw bar plot for genera breakdown with subplot
 genera_sub <- ggplotGrob(ggplot() +
@@ -100,17 +123,17 @@ genera_sub <- ggplotGrob(ggplot() +
                            xlab("") +
                            ylab("") +
                            theme_bw() +
-                           guides(fill = FALSE) +
+                           #guides(fill = FALSE) +
                            scale_y_continuous(limits = c(0, 3250), expand = c(0, 0)) +
                            scale_x_discrete(labels = c("Apis", "Bombus", "Osmia", "Megachile", "Xylocopa", "Andrena", "Melipona", "Manduca", "Trigona", "Centris", "Ceratosolen", "Glossophaga", "Lasioglossum", "Other genera")) +
-                           scale_fill_manual(name = "Taxonomic orders", values = colour_palette,  na.value = "grey") +
+                           scale_fill_manual(name = "Taxonomic orders", values = colour_palette, breaks = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Rodentia", "Other")) +
                            theme(panel.grid = element_blank(), panel.background = element_rect(), text = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 1)))
 
 # subplot for all order breakdown
 ggplot(order_counts) +
   geom_bar(aes(x = taxa_data.order.i., fill = taxa_data.order.i.), stat = "count") +
   theme_bw() +
-  scale_fill_manual(name = "Taxonomic orders", values = c("#0072B2", "#CC79A7", "#E69F00", "#009E73", "#999999", "black",  "#56B4E9", "#F0E442", "#D55E00") , breaks = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Hemiptera", "Other")) +
+  scale_fill_manual(name = "Taxonomic orders", values = c("#0072B2", "#CC79A7", "#E69F00", "#009E73", "#999999", "black",  "#56B4E9", "#D55E00"), breaks = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Rodentia", "Other")) +
   scale_y_continuous(limits = c(0, 4000), expand = c(0, 0)) +
   ylab("Study number") +
   xlab("") +
@@ -120,7 +143,7 @@ ggplot(order_counts) +
     xmin = 3, xmax = 9, ymin = 1400, ymax = 3600)
 
 # save the plot - genus
-ggsave("abstract_geoparse_genus-proportion-13.png", dpi = 380, scale = 1.2)
+ggsave("abstract_geoparse_genus-proportion-14.png", dpi = 380, scale = 1.2)
 
 ## supplmentary info genera breakdown plots
 
