@@ -15,7 +15,7 @@ library(stringr)
 library(patchwork)
 library(mapproj)
 
-# source the functions R script
+# source the functions R scripts
 source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
 
 # read in the geoparsed data

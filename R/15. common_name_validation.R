@@ -87,7 +87,7 @@ scrape_common$panel[scrape_common$type_1 == 1] <- 1
 scrape_common$panel[scrape_common$type_1 == 3] <- 1
 scrape_common <- rbind(scrape_panel_2, scrape_common)
 
-# filter for panel 1 and 2 and order scrape_common and add x/y columns
+# filter for panel 1 and 2 and order scrape_common and add x/y column
 scrape_common_1 <- scrape_common %>% dplyr::filter(panel == 1)
 scrape_common_1 <- scrape_common_1[order(scrape_common_1$type_1),] 
 scrape_common_2 <- scrape_common %>% dplyr::filter(panel == 2)
