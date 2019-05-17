@@ -13,6 +13,7 @@ library(raster)
 library(forcats)
 library(stringr)
 library(patchwork)
+library(mapproj)
 
 # source the functions R script
 source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
@@ -30,27 +31,11 @@ geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outp
 # read in the species scraped data
 species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
-# read in the pollinator confirmation file
-species_confirmation <- read.csv("~/PhD/Aims/Aim 2 - understand response to environmental change/Data/global clade extrapolation/global_polllinating_confirmation_manual-edit.csv", stringsAsFactors = FALSE)
-
-# subset species_confirmation for those confirmed as pollinators
-species_confirmation <- species_confirmation %>%
-  filter(Pollinating.evidence.reference == "Y")
-
 ## set up the data for the first density map and country histogram
 # select main columns 
 species_scraped <- species_scraped %>%
   dplyr::rename(taxa_data...taxonID.i. = taxa_data.ï..taxonID.i.) %>%
   dplyr::select(-original, -taxa_data.scientificNameAuthorship.i., -taxa_data...taxonID.i., -taxa_data.acceptedNameUsageID.i., -taxa_data.parentNameUsageID.i., -taxa_data.taxonomicStatus.i., -level)
-
-# only keep first and second word in extra genera column
-species_scraped$generas <- species_scraped$scientific_name %>% word(1, 1)
-confirmed <- species_confirmation$aggregated.scientific_name.i
-
-# filter for confirmed pollinators and then remove the generas column
-species_scraped <- species_scraped %>%
-  dplyr::filter(generas %in% confirmed) %>%
-  dplyr::select(-generas)
 
 # get unique species_scraped titles
 species_EID <- species_scraped %>% 
@@ -58,7 +43,7 @@ species_EID <- species_scraped %>%
   dplyr::select(EID) %>%
   unique()
 
-# subset geoparsed for those EID in species_scrape and with confirmed pollinators
+# subset geoparsed for those EID in species_scrape
 geoparsed <- geoparsed %>%
   dplyr::filter(EID %in% species_EID$EID)
 
@@ -125,7 +110,36 @@ density_map <- ggplot() +
         panel.background = element_rect(fill = "white"))
 
 # save the plot
-ggsave("abstract_geoparse-major-minor_ratio_15.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse-major-minor_ratio_14.png", dpi = 380, scale = 1.5)
+
+# build the map - this one is count of studies per country, with minor mentions
+count_map <- ggplot() + 
+  geom_polygon(aes(x = long, y = lat, group = group, fill = log10(within_all)), 
+               data = within_map) +
+  geom_count(aes(x = lon, y = lat), 
+             data = geoparsed_minor, colour = "blue", alpha = 0.4) +
+  scale_fill_gradient2(low = "yellow", 
+                       high = "red",
+                       mid = "orange",
+                       na.value = "yellow",
+                       midpoint = 1.25,
+                       name = "Study count",
+                       space = "Lab",
+                       labels = c(1, 10, 100, 500),
+                       breaks = c(0, 1, 2, 2.69897)
+                       ) +
+  scale_size_area(name = "Mentions") +
+  guides(fill = guide_colorbar(ticks = FALSE, order = 1)) +
+  coord_map(projection = "mollweide") +
+  theme(axis.text = element_blank(), 
+        axis.ticks = element_blank(), 
+        axis.title = element_blank(),
+        axis.line = element_blank(),
+        text = element_text(size = 12),
+        panel.background = element_rect(fill = "white"))
+
+# save the plot
+ggsave("abstract_geoparse-major-minor_count.png", dpi = 380, scale = 1.5)
 
 ## build bar plot frequencies for country proportions
 proportion_bar <- area_within %>% 
@@ -165,7 +179,7 @@ ggplot(proportion_bar) +
         legend.title = element_text(size = 15)) 
 
 # save the plot
-ggsave("abstract_geoparse_study-proportion-9.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse_study-proportion-8.png", dpi = 380, scale = 1.5)
 
 ## map facetted by taxonomic group - set up the data
 
@@ -191,7 +205,7 @@ main_orders <- c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Passer
 spec_geoparsed_minor$taxa_data.order.i. <- spec_geoparsed_minor$taxa_data.order.i.  %>% fct_collapse(Other = spec_geoparsed_minor$taxa_data.order.i.[!spec_geoparsed_minor$taxa_data.order.i. %in% main_orders])
 
 # sort the orders
-spec_geoparsed_minor$taxa_data.order.i. <- factor(spec_geoparsed_minor$taxa_data.order.i., levels = c("Hymenoptera", "Lepidoptera", "Diptera", "Chiroptera", "Apodiformes", "Passeriformes", "Coleoptera", "Hemiptera", "Other"))
+spec_geoparsed_minor$taxa_data.order.i. <- factor(spec_geoparsed_minor$taxa_data.order.i., levels = c("Hymenoptera", "Lepidoptera", "Diptera", "Apodiformes", "Chiroptera", "Passeriformes", "Coleoptera", "Hemiptera", "Other"))
 
 spec_geoparsed_minor$scientific_name <- factor(spec_geoparsed_minor$scientific_name, levels = c("Apis", "Bombus", "Osmia", "Megachile", "Xylocopa", "Andrena", "Melipona", "Manduca", "Trigona", "Centris", "Ceratosolen", "Glossophaga", "Other"))
 
@@ -281,4 +295,4 @@ taxonomy_map <- ggplot() +
 taxonomy_map + other_map + plot_layout(ncol = 1)
 
 # save the plot
-ggsave("abstract_geoparse-taxonomic-group_24.png", dpi = 380, scale = 1.6)
+ggsave("abstract_geoparse-taxonomic-group_23.png", dpi = 380, scale = 1.6)
