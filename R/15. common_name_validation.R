@@ -113,31 +113,19 @@ scrape_common$type_1[scrape_common$scraped == TRUE & scrape_common$common == TRU
 scrape_common$type_1[scrape_common$scraped == TRUE & scrape_common$common == FALSE] <- 2
 scrape_common$type_1[scrape_common$scraped == FALSE & scrape_common$common == TRUE] <- 3
 
-# panel number
-#scrape_panel_2 <- scrape_common %>% dplyr::filter(type_1 == 1) %>% mutate(panel = 2)
-
-#scrape_common$panel[scrape_common$type_1 == 2] <- 2
-#scrape_common$panel[scrape_common$type_1 == 1] <- 1
-#scrape_common$panel[scrape_common$type_1 == 3] <- 1
-#scrape_common <- rbind(scrape_panel_2, scrape_common)
-
 # plot across two panels
 Bombus <- scrape_common %>%
   mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
-  #mutate(panel = factor(panel, levels = c(2, 1), labels = c("Latin", "Common"))) %>%
   ggplot() +
     geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
-    #facet_grid(~panel)  +
     scale_fill_manual("Taxonomic name", 
                       label = c("Common only","Latin only", "Latin and Common"),
                       values = c("red", "orange", "grey")) +
     theme_bw() +
     guides(fill = FALSE) +
-    ylim(0, 2250) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, 2150)) +
     xlab("Bombus") +
     theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
-
-
 
 # apis plot
 # strings to check for 
@@ -171,26 +159,16 @@ scrape_common_apis$type_1[scrape_common_apis$scraped == TRUE & scrape_common_api
 scrape_common_apis$type_1[scrape_common_apis$scraped == TRUE & scrape_common_apis$common == FALSE] <- 2
 scrape_common_apis$type_1[scrape_common_apis$scraped == FALSE & scrape_common_apis$common == TRUE] <- 3
 
-# panel number
-#scrape_panel_2_apis <- scrape_common_apis %>% dplyr::filter(type_1 == 1) %>% mutate(panel = 2)
-
-#scrape_common_apis$panel[scrape_common_apis$type_1 == 2] <- 2
-#scrape_common_apis$panel[scrape_common_apis$type_1 == 1] <- 1
-#scrape_common_apis$panel[scrape_common_apis$type_1 == 3] <- 1
-#scrape_common_apis <- rbind(scrape_panel_2_apis, scrape_common_apis)
-
 # plot across two panels
 Apis <- scrape_common_apis %>%
   mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
-  #mutate(panel = factor(panel, levels = c(2, 1), labels = c("Latin", "Common"))) %>%
   ggplot() +
   geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
-  #facet_wrap(~panel)   +
   scale_fill_manual("Taxonomic name", 
                     label = c("Common only","Latin only", "Latin and Common"),
                     values = c("red", "orange", "grey")) +
   theme_bw() +
-  ylim(0, 2250) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2150)) +
   guides(fill = FALSE) +
   xlab("Apis") +
   ylab("Abstract count") +
@@ -229,27 +207,17 @@ scrape_common_mason$type_1[scrape_common_mason$scraped == TRUE & scrape_common_m
 scrape_common_mason$type_1[scrape_common_mason$scraped == TRUE & scrape_common_mason$common == FALSE] <- 2
 scrape_common_mason$type_1[scrape_common_mason$scraped == FALSE & scrape_common_mason$common == TRUE] <- 3
 
-# panel number
-#scrape_panel_2_mason <- scrape_common_mason %>% dplyr::filter(type_1 == 1) %>% mutate(panel = 2)
-
-#scrape_common_mason$panel[scrape_common_mason$type_1 == 2] <- 2
-#scrape_common_mason$panel[scrape_common_mason$type_1 == 1] <- 1
-#scrape_common_mason$panel[scrape_common_mason$type_1 == 3] <- 1
-#scrape_common_mason <- rbind(scrape_panel_2_mason, scrape_common_mason)
-
 # plot across two panels
 mason <- scrape_common_mason %>%
   mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
-  #mutate(panel = factor(panel, levels = c(2, 1), labels = c("Latin", "Common"))) %>%
   ggplot() +
   geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
-  #facet_wrap(~panel)   +
   scale_fill_manual("Taxonomic name", 
                     label = c("Common only","Latin only", "Latin and Common"),
                     values = c("red", "orange", "grey")) +
   xlab("Osmia") +
   guides(fill = FALSE) +
-  ylim(0, 2250) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2150)) +
   theme_bw() +
   theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
 
@@ -288,15 +256,13 @@ scrape_common_leafcutter$type_1[scrape_common_leafcutter$scraped == FALSE & scra
 # plot across two panels
 leafcutter <- scrape_common_leafcutter %>%
   mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
-  #mutate(panel = factor(panel, levels = c(2, 1), labels = c("Latin", "Common"))) %>%
   ggplot() +
   geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
-  #facet_wrap(~panel)   +
   scale_fill_manual("Taxonomic name", 
                     label = c("Common only","Latin only", "Latin and Common"),
                     values = c("red", "orange", "grey")) +
   xlab("Megachile") +
-  ylim(0, 2250) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2150)) +
   theme_bw() +
   theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
 
