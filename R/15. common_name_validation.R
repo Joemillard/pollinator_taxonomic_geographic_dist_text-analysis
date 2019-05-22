@@ -177,7 +177,7 @@ Apis <- scrape_common_apis %>%
 
 # apis plot
 # strings to check for 
-mason_strings <- c("mason bee", "masonbee")
+mason_strings <- c("mason bee", "mason-bee")
 
 # run function to count number of strings and then just take the EID
 bees_mason <- count_bees(abstracts, mason_strings)
@@ -223,7 +223,7 @@ mason <- scrape_common_mason %>%
 
 # apis plot
 # strings to check for 
-leafcutter_strings <- c("leafcutter bee", "leafcutting bee")
+leafcutter_strings <- c("leafcutter bee", "leaf-cutter bee")
 
 # run function to count number of strings and then just take the EID
 bees_leafcutter <- count_bees(abstracts, leafcutter_strings)
@@ -268,4 +268,4 @@ leafcutter <- scrape_common_leafcutter %>%
 
 Apis + Bombus + mason + leafcutter +plot_layout(nrow = 1)
 
-ggsave("comb_latin_binomial_4.png", scale  = 1, dpi = 350)
+ggsave("comb_latin_binomial_5.png", scale  = 1, dpi = 350)
