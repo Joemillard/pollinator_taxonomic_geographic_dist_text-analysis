@@ -7,7 +7,7 @@ packages <- c("dplyr")
 library(dplyr)
 
 # read in the scopus download
-scopus_download <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/scopus_download.csv", stringsAsFactors=FALSE)
+scopus_download <- read.csv("data/scopus_download.csv", stringsAsFactors=FALSE)
 
 # random sample of abstracts - set seed first
 set.seed(20)
@@ -20,4 +20,4 @@ random_scopus <- random_scopus %>%
   select(Title, Year, Abstract, EID)
 
 # write to csv
-write.csv(random_scopus, "300_random-abstracts_check-species-scrape.csv")
+write.csv(random_scopus, "outputs/validation/300_random-abstracts_check-species-scrape.csv")

@@ -9,17 +9,17 @@ library(data.table)
 library(stringi)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 # read in the scraped species names 
-species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
 # convert scraped species to character
 species_scraped$Year <- species_scraped$Year %>%
   as.character()
 
-# read in the abstracts 
-scopus_download <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/scopus_download.csv", stringsAsFactors = FALSE, na.strings = c("", "NA"))
+# read in the abstracts as a single bound object
+scopus_download <- read.csv("data/scopus_download.csv", stringsAsFactors = FALSE, na.strings = c("", "NA"))
 
 # subset for required columns in Abstract
 Abstracts <- scopus_download %>%
@@ -53,4 +53,4 @@ cleaned_abstracts$abstract <- stri_enc_toutf8(cleaned_abstracts$abstract)
 cleaned_abstracts$abstract <- iconv(cleaned_abstracts$abstract, to = "ASCII//TRANSLIT")
 
 # write to csv for export to python
-write.csv(cleaned_abstracts, "04_animal-species_abs_1-2-cleaned-for-geoparse.csv")
+write.csv(cleaned_abstracts, "outputs/03_animal-species_abs_1-2-cleaned-for-geoparse.csv")

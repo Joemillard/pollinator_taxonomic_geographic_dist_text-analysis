@@ -16,20 +16,20 @@ library(patchwork)
 library(mapproj)
 
 # source the functions R scripts
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 # read in the geoparsed data
-geoparsed <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # remove duplicates
 geoparsed <- geoparsed %>% dplyr::select(-X.U.FEFF.)
 geoparsed <- geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
 
 # read in the mistakes for geoparser and put into one column
-geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/checking_geoparsed/geoparse_check.csv", stringsAsFactors=FALSE)
+geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsFactors=FALSE)
 
 # read in the species scraped data
-species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
 ## set up the data for the first density map and country histogram
 # select main columns 

@@ -11,10 +11,10 @@ library(stringr)
 library(patchwork)
 
 # read in genus counts - unfiltered (some with no geographic mentions for that paper)
-genus_counts <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/Species_merge-aggregation/cliff_species_genus_aggregation_05.csv", stringsAsFactors=FALSE)
+genus_counts <- read.csv("outputs/cliff_species_genus_aggregation_05.csv", stringsAsFactors=FALSE)
 
 # read in the raw scraped data
-order_counts <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
+order_counts <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
 
 # get unique species_scraped titles
 species_EID <- order_counts %>% 

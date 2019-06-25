@@ -9,10 +9,10 @@ library(stringr)
 library(data.table)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
-# read in data
-taxa <- read.delim("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Taxonomic data/2017-annual/taxa.txt", stringsAsFactors=FALSE)
+# download and read in 2017 catalogue of life data
+taxa <- read.delim("data/taxonomic_data/taxa.txt", stringsAsFactors=FALSE)
 
 # clean data - seleting the appropriate columns and filtering for animals
 new_taxa <- taxa %>%
@@ -30,4 +30,4 @@ system.time({
 })
 
 # save as rds file
-saveRDS(species_names, "unique_COL_species_03.rds")
+saveRDS(species_names, "data/taxonomic_data/unique_COL_species_03.rds")

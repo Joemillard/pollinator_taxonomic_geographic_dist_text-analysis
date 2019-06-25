@@ -9,12 +9,12 @@ library(stringr)
 library(data.table)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 ## read in the csvs for taxonomic data and the scraped records
 
 # read abstract scrape
-all_abs <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/Abstracts/03_30644-abs_DOI_Year_Title_EID.csv", stringsAsFactors=FALSE)
+all_abs <- read.csv("outputs/03_30644-abs_DOI_Year_Title_EID.csv", stringsAsFactors=FALSE)
 all_abs$original <- all_abs$scientific_name
 
 # if abstracts read in, change File_loc column to DOI 
@@ -22,13 +22,10 @@ all_records <- all_abs %>%
   rename(File_loc = DOI)
 
 # read in COL data, change to character and rename variable
-unique_col <- readRDS("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Taxonomic data/2017-annual/cleaned/unique_COL_species_03.rds")
+unique_col <- readRDS("data/taxonomic_data/unique_COL_species_03.rds")
 unique_col <- unique_col %>%
   rename(scientific_name = temp) %>%
   mutate_all(as.character)
-
-# read in DEFRA pollinator indicators
-pollinators <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Defra pollinator indicators.csv")
 
 # trim unique_col white space
 unique_col$scientific_name <- unique_col$scientific_name %>%
@@ -158,4 +155,4 @@ accepted_synonym <- accepted_synonym %>%
 level_1_2_synonym <- rbind(accepted, accepted_synonym)
 
 # write to csv
-write.csv(level_1_2_synonym, "07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv")
+write.csv(level_1_2_synonym, "outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv")

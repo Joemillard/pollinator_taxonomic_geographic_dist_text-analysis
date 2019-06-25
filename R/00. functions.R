@@ -372,3 +372,36 @@ count_countries <- function(download, countries){
   return(species_countries)
   
 }
+
+# function to count the number of bee strings in each abstract
+count_bees <- function(download, bee_strings){
+  
+  # make empty list object
+  data <- list()
+  
+  # iterate through each of the downloads abstract object
+  for (i in 1:nrow(download)) ({
+    
+    # iterate through each of the bees
+    for (j in 1:length(bee_strings)) ({
+      
+      # if bee in the abstract, assign a boolean
+      logical_name <- grepl(bee_strings[j], download$abstract[i])
+      
+      # if boolean is true build row of dataframe for that abstract
+      if(logical_name == TRUE)({
+        
+        # build dataframe for that iteration and assign to element of a list
+        data[[i*j]] <- data.frame(bee_strings[j], download$EID[i])
+      })
+    })
+    
+    print(i)
+    
+  })
+  
+  # bind all rows and return
+  species_countries <- rbindlist(data)
+  return(species_countries)
+  
+}

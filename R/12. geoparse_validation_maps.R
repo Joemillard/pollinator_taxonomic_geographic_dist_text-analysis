@@ -10,16 +10,16 @@ library(rworldmap)
 library(rworldxtra)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 # read in the mistakes for geoparser and put into one column
-geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/checking_geoparsed/geoparse_check.csv", stringsAsFactors=FALSE)
+geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsFactors=FALSE)
 
 # read in the manually geoparsed file
-manual_geoparse <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/validation/100-abstracts_pollination-relatedness-check_geographic-location-edit.csv", stringsAsFactors=FALSE)
+manual_geoparse <- read.csv("data/validation_data/100-abstracts_pollination-relatedness-check_geographic-location-edit.csv", stringsAsFactors=FALSE)
 
 # read in the automatically geoparsed file
-auto_geoparse <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/03-geoparsed-abstracts_level-1-2-cleaned.csv", stringsAsFactors=FALSE)
+auto_geoparse <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", stringsAsFactors=FALSE)
 
 # run for to remove the oddities and continental mentions
 auto_geoparse <- form_geoparse(data = auto_geoparse, foc = c("major", "minor"), continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")

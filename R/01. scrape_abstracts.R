@@ -9,29 +9,29 @@ library(taxize)
 library(data.table)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 ## read in the full Scopus download and set up data - 30,664 articles; pollinat*, English, Articles ####
-pollinat_2018 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/01-2018_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2017 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/02-2017_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2016 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/03-2016_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2015 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/04-2015_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2014 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/05-2014_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2013 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/06-2013_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2012 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/07-2012_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2011 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/08-2011_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2010 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/09-2010_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2009 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/10-2009_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2008 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/11-2008_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2007_2006 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/12-2007-2006_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2005_2004 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/13-2005-2004_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2003_2002 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/14-2003-2002_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_2001_2000 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/15-2001-2000_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_1999_1997 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/16-1999-1997_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_1996_1993 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/17-1996-1993_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_1992_1988 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/18-1992-1988_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_1987_1978 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/19-1987-1978_pollinat_English_articles.csv", stringsAsFactors=FALSE)
-pollinat_1977_1903 <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/20-1977-1903_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2018 <- read.csv("data/01-2018_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2017 <- read.csv("data/02-2017_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2016 <- read.csv("data/03-2016_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2015 <- read.csv("data/04-2015_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2014 <- read.csv("data/05-2014_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2013 <- read.csv("data/06-2013_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2012 <- read.csv("data/07-2012_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2011 <- read.csv("data/08-2011_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2010 <- read.csv("data/09-2010_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2009 <- read.csv("data/10-2009_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2008 <- read.csv("data/11-2008_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2007_2006 <- read.csv("data/12-2007-2006_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2005_2004 <- read.csv("data/13-2005-2004_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2003_2002 <- read.csv("data/14-2003-2002_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_2001_2000 <- read.csv("data/15-2001-2000_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_1999_1997 <- read.csv("data/16-1999-1997_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_1996_1993 <- read.csv("data/17-1996-1993_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_1992_1988 <- read.csv("data/18-1992-1988_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_1987_1978 <- read.csv("data/19-1987-1978_pollinat_English_articles.csv", stringsAsFactors=FALSE)
+pollinat_1977_1903 <- read.csv("data/20-1977-1903_pollinat_English_articles.csv", stringsAsFactors=FALSE)
 
 # bind data from all years
 scopus_download <- rbind(pollinat_2018, pollinat_2017, pollinat_2016, pollinat_2015, 
@@ -40,6 +40,9 @@ scopus_download <- rbind(pollinat_2018, pollinat_2017, pollinat_2016, pollinat_2
                          pollinat_2005_2004, pollinat_2003_2002, pollinat_2001_2000,
                          pollinat_1999_1997, pollinat_1996_1993, pollinat_1992_1988,
                          pollinat_1987_1978, pollinat_1977_1903)
+
+# write scopus file to csv for scripts downstream
+write.csv(scopus_download, "data/scopus_download.csv")
 
 # filter scopus download for abstract and DOI, and subsetted row when testing
 Abstract <- scopus_download %>%
@@ -52,4 +55,4 @@ system.time({
 })
 
 # write to csv
-write.csv(all_species, "03_30644-abs_DOI_Year_Title_EID.csv")
+write.csv(all_species, "outputs/03_30644-abs_DOI_Year_Title_EID.csv")

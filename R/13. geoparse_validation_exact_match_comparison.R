@@ -14,22 +14,22 @@ library(raster)
 library(patchwork)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 # read in countries adn extract string
-countries <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/ISO-3166-Countries-with-Regional-Codes-master/all/all.csv", header = TRUE, stringsAsFactors = FALSE)
+countries <- read.csv("data/validation_data/all_country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # read in the abstracts
-abstracts <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/03_animal-species_abs_1-2-cleaned-for-geoparse.csv", stringsAsFactors = FALSE)
+abstracts <- read.csv("outputs/03_animal-species_abs_1-2-cleaned-for-geoparse.csv", stringsAsFactors = FALSE)
 
 # read in species scrape
-species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
 # read in the geoparsed data
-geoparsed <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # read in the mistakes for geoparser and put into one column
-geoparse_check <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/checking_geoparsed/geoparse_check.csv", stringsAsFactors=FALSE)
+geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsFactors=FALSE)
 
 # remove duplicates
 geoparsed <- geoparsed %>% dplyr::select(-X.U.FEFF.)

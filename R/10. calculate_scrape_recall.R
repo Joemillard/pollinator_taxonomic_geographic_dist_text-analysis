@@ -11,7 +11,7 @@ library(stringr)
 # http://www.discoverlife.org - catalogue of life
 
 # read in the manual scrape
-manual_scrape <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/validation/300_random-abstracts_manual-scrape.csv")
+manual_scrape <- read.csv("data/validation_data/300_random-abstracts_manual-scrape.csv")
 
 # select only required columns and rename
 manual_scrape <- manual_scrape %>%
@@ -22,7 +22,7 @@ manual_scrape <- manual_scrape %>%
 manual_scrape$scientific_name_2 <- manual_scrape$scientific_name
 
 # read in the automated cleaned scrape
-automated_approach <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
+automated_approach <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
 
 # only keep first and second word
 automated_approach$scientific_name <- automated_approach$scientific_name %>% word(1, 2)

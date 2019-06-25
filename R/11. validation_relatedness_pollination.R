@@ -9,10 +9,10 @@ library(ggplot2)
 library(patchwork)
 
 # read in the original scopus download
-scopus_download <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Data/Scopus data downloads/scopus_download.csv", stringsAsFactors = FALSE)
+scopus_download <- read.csv("data/scopus_download.csv", stringsAsFactors = FALSE)
 
 # read in the scraped data
-scraped_species <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+scraped_species <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
 # vector for unique IDs
 unique_EID <- unique(scraped_species$EID)
@@ -33,7 +33,7 @@ scopus_filtered <-  scopus_filtered[sample(nrow(scopus_filtered), 100),]
 ## build figure for proportion
 
 # read in csv
-abstract_relatedness <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/validation/100-abstracts_pollination-relatedness-check_manual-edit.csv", stringsAsFactors = TRUE)
+abstract_relatedness <- read.csv("outputs/validation/100-abstracts_pollination-relatedness-check_manual-edit.csv", stringsAsFactors = TRUE)
 
 # sort the levels
 abstract_relatedness$Study_type <- factor(abstract_relatedness$Study_type, levels = c("other", "status", "general"))

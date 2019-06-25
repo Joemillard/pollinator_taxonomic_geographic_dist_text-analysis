@@ -10,13 +10,13 @@ library(data.table)
 library(stringr)
 
 # source the functions R script
-source("~/PhD/Aims/Aim 1 - collate pollinator knowledge/pollinator_taxonomic_geographic_dist_text-analysis/R/00. functions.R")
+source("R/00. functions.R")
 
 # read in the scraped species names 
-species_scraped <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
 
 # read in the geoparsed data
-geoparsed <- read.csv("~/PhD/Aims/Aim 1 - collate pollinator knowledge/Outputs/scrape_abs/cleaned/for_geoparse/Post_geoparse/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # get unique species_scraped titles
 species_EID <- species_scraped %>% 
@@ -48,9 +48,6 @@ agg_data_DOI <- unique_row_DOI(aggregated = aggregated_DOI)
 agg_data_DOI <- agg_data_DOI %>%
   mutate_all(as.character)
 
-# write to csv
-write.csv(agg_data_DOI, "cliff_species_DOI_aggregation-04.csv")
-
 ## aggregate by pollinator
 aggregated_spec <- aggregate(cbind(level, Year, EID, name, taxa_data.class.i., taxa_data.order.i., taxa_data.family.i.) ~ scientific_name, data = scrape_clean, paste, collapse = ", ")
 
@@ -68,5 +65,6 @@ agg_data_spec$DOI_count <- str_count(agg_data_spec$unique_loc, ", ") + 1
 agg_data_spec <- agg_data_spec[c("aggregated.scientific_name.i.", "unique_class", "unique_order", "unique_family", "unique_loc", "DOI_count", "unique_year", "unique_name", "unique_level")]
 agg_data_spec <- agg_data_spec[order(-agg_data_spec$DOI_count),]
 
-# write species aggregations to csv
-write.csv(agg_data_spec, "cliff_species_genus_aggregation_fully-filtered-05.csv")
+# write species and genus aggregations to csv - agg_data_spec needed for figures downstream
+write.csv(agg_data_spec, "outputs/cliff_species_genus_aggregation_05.csv")
+#write.csv(agg_data_DOI, "cliff_species_DOI_aggregation-04.csv")
