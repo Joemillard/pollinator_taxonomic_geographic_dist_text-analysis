@@ -414,7 +414,7 @@ loaded via a namespace (and not attached):
 ```
 
 ---
-**15. common_nam_validation.R - script for counting the number of common name strings in each abstract and comparing to the Latin binomial names
+**15. common_name_validation.R** - script for counting the number of common name strings in each abstract and comparing to the Latin binomial names
 
 Session info
 ```
