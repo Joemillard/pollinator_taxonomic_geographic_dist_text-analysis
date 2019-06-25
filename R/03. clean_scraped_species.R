@@ -14,7 +14,7 @@ source("R/00. functions.R")
 ## read in the csvs for taxonomic data and the scraped records
 
 # read abstract scrape
-all_abs <- read.csv("outputs/03_30644-abs_DOI_Year_Title_EID.csv", stringsAsFactors=FALSE)
+all_abs <- read.csv("outputs/01. initial_abstract_scrape.csv", stringsAsFactors=FALSE)
 all_abs$original <- all_abs$scientific_name
 
 # if abstracts read in, change File_loc column to DOI 
@@ -155,4 +155,4 @@ accepted_synonym <- accepted_synonym %>%
 level_1_2_synonym <- rbind(accepted, accepted_synonym)
 
 # write to csv
-write.csv(level_1_2_synonym, "outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv")
+write.csv(level_1_2_synonym, "outputs/02. post_COL_species_scrape.csv")

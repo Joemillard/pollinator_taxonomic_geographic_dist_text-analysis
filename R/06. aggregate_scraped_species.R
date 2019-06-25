@@ -13,10 +13,10 @@ library(stringr)
 source("R/00. functions.R")
 
 # read in the scraped species names 
-species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 # read in the geoparsed data
-geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/04. post_geoparsed_abstracts.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # get unique species_scraped titles
 species_EID <- species_scraped %>% 
@@ -66,5 +66,5 @@ agg_data_spec <- agg_data_spec[c("aggregated.scientific_name.i.", "unique_class"
 agg_data_spec <- agg_data_spec[order(-agg_data_spec$DOI_count),]
 
 # write species and genus aggregations to csv - agg_data_spec needed for figures downstream
-write.csv(agg_data_spec, "outputs/cliff_species_genus_aggregation_05.csv")
+write.csv(agg_data_spec, "outputs/05. genus_aggregations.csv")
 #write.csv(agg_data_DOI, "cliff_species_DOI_aggregation-04.csv")

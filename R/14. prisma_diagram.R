@@ -14,7 +14,7 @@ library(stringr)
 source("R/00. functions.R")
 
 # read in the geoparsed data
-geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/04. post_geoparse_abstracts.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # remove duplicates
 geoparsed <- geoparsed %>% dplyr::select(-X.U.FEFF.)
@@ -24,7 +24,7 @@ geoparsed <- geoparsed %>% group_by(EID) %>% unique() %>% ungroup()
 geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsFactors=FALSE)
 
 # read in the species scraped data
-species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 ## set up the data calculate species, genera, and order frequencies
 # select main columns 

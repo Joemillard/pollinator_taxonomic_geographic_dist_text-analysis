@@ -12,7 +12,7 @@ library(stringi)
 source("R/00. functions.R")
 
 # read in the scraped species names 
-species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 # convert scraped species to character
 species_scraped$Year <- species_scraped$Year %>%
@@ -53,4 +53,4 @@ cleaned_abstracts$abstract <- stri_enc_toutf8(cleaned_abstracts$abstract)
 cleaned_abstracts$abstract <- iconv(cleaned_abstracts$abstract, to = "ASCII//TRANSLIT")
 
 # write to csv for export to python
-write.csv(cleaned_abstracts, "outputs/03_animal-species_abs_1-2-cleaned-for-geoparse.csv")
+write.csv(cleaned_abstracts, "outputs/03. animal_species_cleaned_for_geoparse.csv")

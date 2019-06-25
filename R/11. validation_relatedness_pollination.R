@@ -12,7 +12,7 @@ library(patchwork)
 scopus_download <- read.csv("data/scopus_download.csv", stringsAsFactors = FALSE)
 
 # read in the scraped data
-scraped_species <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+scraped_species <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 # vector for unique IDs
 unique_EID <- unique(scraped_species$EID)

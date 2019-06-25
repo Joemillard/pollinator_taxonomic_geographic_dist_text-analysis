@@ -1,4 +1,4 @@
-## script for cleaning the COL taxonomic download - i.e. removing the author names 
+## script for cleaning the COL taxonomic download - i.e. removing the author names and subsetting for animals
 
 # vector for the packages to install 
 packages <- c("dplyr", "stringr", "data.table")

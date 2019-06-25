@@ -55,4 +55,4 @@ system.time({
 })
 
 # write to csv
-write.csv(all_species, "outputs/03_30644-abs_DOI_Year_Title_EID.csv")
+write.csv(all_species, "outputs/01. initial_abstract_scrape.csv")

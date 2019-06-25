@@ -22,7 +22,7 @@ manual_scrape <- manual_scrape %>%
 manual_scrape$scientific_name_2 <- manual_scrape$scientific_name
 
 # read in the automated cleaned scrape
-automated_approach <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors=FALSE)
+automated_approach <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors=FALSE)
 
 # only keep first and second word
 automated_approach$scientific_name <- automated_approach$scientific_name %>% word(1, 2)

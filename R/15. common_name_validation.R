@@ -12,7 +12,7 @@ library(patchwork)
 source("R/00. functions.R")
 
 # read in the species scraped data
-species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 ## read in the full Scopus download and set up data - 30,664 articles; pollinat*, English, Articles ####
 pollinat_2018 <- read.csv("data/01-2018_pollinat_English_articles.csv", stringsAsFactors=FALSE)

@@ -19,7 +19,7 @@ geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsF
 manual_geoparse <- read.csv("data/validation_data/100-abstracts_pollination-relatedness-check_geographic-location-edit.csv", stringsAsFactors=FALSE)
 
 # read in the automatically geoparsed file
-auto_geoparse <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", stringsAsFactors=FALSE)
+auto_geoparse <- read.csv("outputs/04. post_geoparse_abstracts.csv", stringsAsFactors=FALSE)
 
 # run for to remove the oddities and continental mentions
 auto_geoparse <- form_geoparse(data = auto_geoparse, foc = c("major", "minor"), continents = unique(geoparse_check$Continent.ocean), oddities = geoparse_check$Oddities, code_out = "IQ")

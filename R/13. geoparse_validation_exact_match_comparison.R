@@ -20,13 +20,13 @@ source("R/00. functions.R")
 countries <- read.csv("data/validation_data/all_country_codes.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # read in the abstracts
-abstracts <- read.csv("outputs/03_animal-species_abs_1-2-cleaned-for-geoparse.csv", stringsAsFactors = FALSE)
+abstracts <- read.csv("outputs/03. animal_species_cleaned_for_geoparse.csv", stringsAsFactors = FALSE)
 
 # read in species scrape
-species_scraped <- read.csv("outputs/07_30644_abs_EID_Year_Title_paper-approach_cleaned.csv", stringsAsFactors = FALSE)
+species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
 # read in the geoparsed data
-geoparsed <- read.csv("outputs/03-geoparsed-abstracts_level-1-2-cleaned.csv", encoding="UTF-8", stringsAsFactors = FALSE)
+geoparsed <- read.csv("outputs/04. post_geoparse_abstracts.csv", encoding="UTF-8", stringsAsFactors = FALSE)
 
 # read in the mistakes for geoparser and put into one column
 geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsFactors=FALSE)
