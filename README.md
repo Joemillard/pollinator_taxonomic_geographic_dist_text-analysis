@@ -27,7 +27,7 @@ There are 14 R scripts and 1 Python script in this analysis:
 
 ## See below for brief script overviews and session info:
 
-**00. functions.R** - all functions used as part of the analysis, sourced into R scripts for analysis where appropriate
+**00. functions.R** - distinct functions used as part of the analysis, sourced into R scripts for analysis where appropriate
 
 **01. scrape_abstracts.R** - scrapes potential taxonomic records from abstracts using scrapenames() in the taxize package
 
@@ -411,4 +411,34 @@ loaded via a namespace (and not attached):
 [31] XML_3.98-1.16      readr_1.1.1        purrr_0.2.5        tidyr_0.8.1        ggplot2_3.0.0      magrittr_1.5      
 [37] scales_1.0.0       htmltools_0.3.6    assertthat_0.2.0   colorspace_1.3-2   brew_1.0-6         V8_1.5            
 [43] stringi_1.1.7      visNetwork_2.0.4   lazyeval_0.2.1     munsell_0.5.0      crayon_1.3.4
+```
+
+---
+**15. common_nam_validation.R - script for counting the number of common name strings in each abstract and comparing to the Latin binomial names
+
+Session info
+```
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows >= 8 x64 (build 9200)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United Kingdom.1252  LC_CTYPE=English_United Kingdom.1252   
+[3] LC_MONETARY=English_United Kingdom.1252 LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] data.table_1.11.8 dplyr_0.8.1       patchwork_0.0.1   forcats_0.3.0     ggplot2_3.1.0     stringr_1.3.1    
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.1       rstudioapi_0.8   magrittr_1.5     tidyselect_0.2.5 munsell_0.5.0    colorspace_1.3-2
+ [7] R6_2.4.0         rlang_0.3.4      plyr_1.8.4       tools_3.5.1      grid_3.5.1       gtable_0.2.0    
+[13] withr_2.1.2      yaml_2.2.0       lazyeval_0.2.1   assertthat_0.2.1 tibble_2.1.1     crayon_1.3.4    
+[19] purrr_0.2.5      glue_1.3.1       stringi_1.2.4    compiler_3.5.1   pillar_1.4.1     scales_1.0.0    
+[25] pkgconfig_2.0.2 
 ```
