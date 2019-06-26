@@ -8,21 +8,21 @@ Please note that this repository is only partially reproducible. To reproduce th
 
 There are 14 R scripts and 1 Python script in this analysis:
 
-```R/00. functions.R```
-```R/01. scrape_abstracts.R```
-```R/02. clean_catologue-of-life.R```
-```R/03. clean_scraped_species.R```
+```R/00. functions.R```<br>
+```R/01. scrape_abstracts.R```<br>
+```R/02. clean_catologue-of-life.R```<br>
+```R/03. clean_scraped_species.R```<br>
 ```R/04. prepare_abs_for_geoparse.R``` <br>
-```python/4a. run_cliff-clavin.py```
-```R/05. geographic_analyses.R```
-```R/06. aggregate_scraped_species.R```
-```R/07. genus_counts_histogram.R```
-```R/08. genera_change_over_time.R```
-```R/09. randomly_sample_abstracts_validation.R```
-```R/10. calculate_scrape_recall.R```
-```R/11. validation_relatedness_pollination.R```
-```R/12. geoparse_validation_maps.R```
-```R/13. geoparse_validation_exact_match_comparison.R```
+```python/4a. run_cliff-clavin.py```<br>
+```R/05. geographic_analyses.R```<br>
+```R/06. aggregate_scraped_species.R```<br>
+```R/07. genus_counts_histogram.R```<br>
+```R/08. genera_change_over_time.R```<br>
+```R/09. randomly_sample_abstracts_validation.R```<br>
+```R/10. calculate_scrape_recall.R```<br>
+```R/11. validation_relatedness_pollination.R```<br>
+```R/12. geoparse_validation_maps.R```<br>
+```R/13. geoparse_validation_exact_match_comparison.R```<br>
 ```R/14. prisma_diagram.R```
 
 ## See below for brief script overviews and session info:
