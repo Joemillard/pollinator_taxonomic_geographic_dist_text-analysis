@@ -448,5 +448,5 @@ loaded via a namespace (and not attached):
 [25] pkgconfig_2.0.2 
 ```
 
-**References**
+**References** <br>
 Roskov Y. et al. (2017). Species 2000 & ITIS Catalogue of Life, 2017 Annual Checklist.
