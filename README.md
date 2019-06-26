@@ -4,26 +4,26 @@ This repository contains all the scripts used for the text analysis carried out 
 
 > **Millard et al (in prep.), Text-analysis reveals taxonomic and geographic disparities in animal pollination literature**
 
-Please note that this repository is not written to be fully reproducible - contact Joe for any queries
+Please note that this repository is only partially reproducible. To reproduce this analysis in full, follow the instructions at https://github.com/ahalterman/CLIFF-up to set up the geoparser CLIFF_CLAVIN.
 
 There are 14 R scripts and 1 Python script in this analysis:
 
-00. functions.R
-01. scrape_abstracts.R
-02. clean_catologue-of-life.R
-03. clean_scraped_species.R
-04. prepare_abs_for_geoparse.R <br>
-4a. run_cliff-clavin.py
-05. geographic_analyses.R
-06. aggregate_scraped_species.R
-07. genus_counts_histogram.R
-08. genera_change_over_time.R
-09. randomly_sample_abstracts_validation.R
-10. calculate_scrape_recall.R
-11. validation_relatedness_pollination.R
-12. geoparse_validation_maps.R
-13. geoparse_validation_exact_match_comparison.R
-14. prisma_diagram.R
+```R/00. functions.R```
+```R/01. scrape_abstracts.R```
+```R/02. clean_catologue-of-life.R```
+```R/03. clean_scraped_species.R```
+```R/04. prepare_abs_for_geoparse.R``` <br>
+```python/4a. run_cliff-clavin.py```
+```R/05. geographic_analyses.R```
+```R/06. aggregate_scraped_species.R```
+```R/07. genus_counts_histogram.R```
+```R/08. genera_change_over_time.R```
+```R/09. randomly_sample_abstracts_validation.R```
+```R/10. calculate_scrape_recall.R```
+```R/11. validation_relatedness_pollination.R```
+```R/12. geoparse_validation_maps.R```
+```R/13. geoparse_validation_exact_match_comparison.R```
+```R/14. prisma_diagram.R```
 
 ## See below for brief script overviews and session info:
 
