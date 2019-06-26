@@ -4,9 +4,11 @@ This repository contains all the scripts used for the text analysis carried out 
 
 > **Millard et al (in prep.), Text-analysis reveals taxonomic and geographic disparities in animal pollination literature**
 
-Please note that this repository is only partially reproducible. To reproduce this analysis in full, follow the instructions at https://github.com/ahalterman/CLIFF-up to set up the geoparser CLIFF_CLAVIN.
+Please note that this repository is only partially reproducible. To reproduce this analysis, follow the instructions at https://github.com/ahalterman/CLIFF-up to set up the geoparser CLIFF_CLAVIN before running script 04a. A .txt copy of the 2017 Catalogue of Life is also required for script 02. (see Roskov et al, 2017).
 
-There are 14 R scripts and 1 Python script in this analysis:
+There are 14 R scripts and 1 python script in this analysis, run sequentially from 01-15. The python script 4a. requires an active instance of CLIFF-CLAVIN running at the local host. All key data written to csv is also hosted here (with the exception of taxonomic data in 02. and 03.), as well as any additional csvs read in throughout the analysis.
+
+The required script are as follows:
 
 ```R/00. functions.R```<br>
 ```R/01. scrape_abstracts.R```<br>
@@ -23,7 +25,8 @@ There are 14 R scripts and 1 Python script in this analysis:
 ```R/11. validation_relatedness_pollination.R```<br>
 ```R/12. geoparse_validation_maps.R```<br>
 ```R/13. geoparse_validation_exact_match_comparison.R```<br>
-```R/14. prisma_diagram.R```
+```R/14. prisma_diagram.R```<br>
+```R/15. common_name_validation.R```
 
 ## See below for brief script overviews and session info:
 
@@ -442,3 +445,7 @@ loaded via a namespace (and not attached):
 [19] purrr_0.2.5      glue_1.3.1       stringi_1.2.4    compiler_3.5.1   pillar_1.4.1     scales_1.0.0    
 [25] pkgconfig_2.0.2 
 ```
+
+**References**
+
+Roskov Y. et al. (2017). Species 2000 & ITIS Catalogue of Life, 2017 Annual Checklist.
