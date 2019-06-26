@@ -8,7 +8,7 @@ Please note that this repository is only partially reproducible. To reproduce th
 
 There are 14 R scripts and 1 python script in this analysis, run sequentially from 01-15. The python script 4a. requires an active instance of CLIFF-CLAVIN running at the local host. All key data written to csv are also hosted here (with the exception of taxonomic data in 02. and 03.), as well as any additional csvs read in throughout the analysis.
 
-Note that this repository is written relative to an R project file (.Rproj). Those wanting to reproduce this analysis should download the whole repo, and then open the repo in R Studioa via the .Rproj file. Also note that all required packages are included as a vector at the top of each script.
+Note that this repository is written relative to an R project file (.Rproj). Those wanting to reproduce this analysis should download the whole repo, and then open via the .Rproj file. Also note that all required packages are included as a vector at the top of each script
 
 The required script are as follows:
 
