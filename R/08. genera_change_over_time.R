@@ -136,7 +136,7 @@ ggplot() +
         text = element_text(size = 15)) +
   guides(colour = FALSE)
 
-ggsave("top_10_genus_yearly-change-13.png", dpi = 350, scale = 1.5)
+ggsave("top_10_genus_yearly-change-13.png", dpi = 400, scale = 1.2)
 
 # overall change for pollination studies
 ggplot(joined_species) + 
