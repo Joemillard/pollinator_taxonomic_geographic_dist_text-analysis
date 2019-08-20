@@ -31,6 +31,9 @@ geoparse_check <- read.csv("data/validation_data/geoparse_check.csv", stringsAsF
 # read in the species scraped data
 species_scraped <- read.csv("outputs/02. post_COL_species_scrape.csv", stringsAsFactors = FALSE)
 
+# European countries
+european_countries <- read.csv("data/validation_data/european_countries.csv", stringsAsFactors = FALSE)
+
 ## set up the data for the first density map and country histogram
 # select main columns 
 species_scraped <- species_scraped %>%
@@ -149,6 +152,19 @@ proportion_bar <- area_within %>%
   bind_rows(filter(area_within, proportion > 0.015)) %>%
   mutate(rn = fct_reorder(rn, -proportion)) %>%
   mutate(rn = fct_relevel(rn, "Rest of the world", after = Inf))
+
+# proportion of studies in North America
+n_america_prop <- area_within %>%
+  filter(rn %in% c("Canada", "United States of America", "Mexico", "Greenland")) %>%
+  summarise(total = sum(proportion))
+
+# proportion of studies in Europe
+europe_prop <- area_within %>% 
+  filter(rn %in% european_countries$country) %>%
+  summarise(total = sum(proportion))
+
+# sum of europe and north america = 0.459
+n_america_prop$total + europe_prop$total
 
 # sort by proportion and then calculate cumulative - to give 50%
 proportion_bar <- proportion_bar[order(proportion_bar$proportion, decreasing = TRUE),]
