@@ -40,7 +40,9 @@ species_EID <- species_scraped %>%
 
 # subset geoparsed for those EID in species_scrape
 geoparsed <- geoparsed %>%
-  dplyr::filter(EID %in% species_EID$EID)
+  dplyr::filter(EID %in% species_EID$EID) %>%
+  dplyr::filter(!name %in% geoparse_check$Continent.ocean) %>%
+  dplyr::filter(!name %in% geoparse_check$Oddities)
 
 # only keep first and second word
 species_scraped$scientific_name <- species_scraped$scientific_name %>% word(1, 2)
@@ -61,10 +63,11 @@ spec <- speciesify(species_geoparsed, 1, 2)
 gen <- gen %>% filter(!is.na(population))
 spec <- spec %>% filter(!is.na(population))
 
-# count number of species, genera, and orders
+# count number of species, genera, orders, and papers with geographic information
 summary(unique(spec$scientific_name))
 summary(unique(gen$scientific_name))
 summary(unique(spec$taxa_data.order.i.))
+length(unique(geoparsed$EID))
 
 ## drawing the PRISMA diagram
 grViz("
@@ -77,16 +80,16 @@ grViz("
       
       ## statement structure
       # papers
-      '37895 (pollinat* papers)'; 36127; 30546; 22469; 3974; 2087
+      '37895 (pollinat* papers)'; 36127; 30546; 22469; 3974; 2087; 2072
       
       # species
-      '2254 (animal species)'; 1673
+      '2254 (animal species)'; 1673; 1668
       
       # genera
-      '1013 (animal genera)'; 765
+      '1013 (animal genera)'; 765; '765 '
       
       # orders
-      '63 (animal orders)'; 47
+      '63 (animal orders)'; 47; '47 '
       
       ## edge statements
       # papers
@@ -99,16 +102,21 @@ grViz("
       22469 -> 3974 [label = '   Filter non animal species record'
       fontname = Helvetica]; 
       3974 -> 2087;
+      2087 -> 2072
       
       # species
       '2254 (animal species)'-> 1673
+      1673 -> 1668
       
       # genera
       '1013 (animal genera)'-> 765
+      765 -> '765 '
       
       # orders
       '63 (animal orders)'-> 47 [label = '   Filter non potential geographic record'
       fontname = Helvetica] 
+      47 -> '47 '  [label = '   Filter continental, oceanic, and incorrect locations'
+      fontname = Helvetica]
       
       subgraph {
       rank = same; '3974'; '1013 (animal genera)'; '63 (animal orders)' ; '2254 (animal species)'
@@ -117,4 +125,4 @@ grViz("
       }
       ") %>%
   
-  export_svg %>% charToRaw %>% rsvg_pdf("prisma-diagram_abstract-scrape-03.pdf", width = 700, height= 700)
+  export_svg %>% charToRaw %>% rsvg_pdf("prisma-diagram_abstract-scrape-04.pdf", width = 700, height= 700)
