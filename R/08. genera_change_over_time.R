@@ -115,10 +115,10 @@ joined_species_bombus$scientific_name <- gsub("Other", "Bombus", joined_species_
 
 # single facet plot for apis, bombus and other genera
 ggplot() + 
-  geom_hex(aes(x = variable, y = value.x),  alpha = 0.25, colour = "white", bins = 50, data = joined_species) +
-  geom_smooth(aes(x = variable, y = value.x, colour = scientific_name), method = "glm", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species, se = FALSE) +
-  geom_smooth(aes(x = variable, y = value.x), colour = "red",  method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_apis, se = FALSE) +
-  geom_smooth(aes(x = variable, y = value.x), colour = "red", method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_bombus, se = FALSE) +
+  geom_hex(aes(x = variable, y = value.x), alpha = 0.75, colour = "white", bins = 50, data = joined_species) +
+  geom_smooth(aes(x = variable, y = value.x, colour = scientific_name), size = 1.1, method = "glm", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species, se = FALSE) +
+  geom_smooth(aes(x = variable, y = value.x), colour = "red",  size = 1.1, method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_apis, se = FALSE) +
+  geom_smooth(aes(x = variable, y = value.x), colour = "red", size = 1.1, method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_bombus, se = FALSE) +
   ylab("Annual study count") +
   facet_wrap(~scientific_name, ncol = 3) +
   xlab("") +
@@ -134,9 +134,10 @@ ggplot() +
         legend.position = "bottom", 
         legend.title = element_text(size = 12, hjust = 1, vjust = 0.75),
         text = element_text(size = 15)) +
-  guides(colour = FALSE)
+  guides(colour = FALSE) +
+  guides(fill = guide_colourbar(ticks = FALSE, override.aes = list(alpha = 0.25)))
 
-ggsave("top_10_genus_yearly-change-13.png", dpi = 400, scale = 1.2)
+ggsave("top_10_genus_yearly-change-14.png", dpi = 400, scale = 1.2)
 
 # overall change for pollination studies
 ggplot(joined_species) + 
