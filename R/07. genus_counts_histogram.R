@@ -120,7 +120,7 @@ ggplot(order_counts) +
     xmin = 3, xmax = 9, ymin = 1400, ymax = 3600)
 
 # save the plot - genus
-ggsave("abstract_geoparse_genus-proportion-13.png", dpi = 380, scale = 1.2)
+ggsave("abstract_geoparse_genus-proportion-14.png", dpi = 380, scale = 1.2)
 
 ## supplmentary info genera breakdown plots
 
