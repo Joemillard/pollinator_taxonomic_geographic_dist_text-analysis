@@ -102,7 +102,7 @@ genera_sub <- ggplotGrob(ggplot() +
                            theme_bw() +
                            guides(fill = FALSE) +
                            scale_y_continuous(limits = c(0, 3250), expand = c(0, 0)) +
-                           scale_x_discrete(labels = c("Apis", "Bombus", "Osmia", "Megachile", "Xylocopa", "Andrena", "Melipona", "Manduca", "Trigona", "Centris", "Ceratosolen", "Glossophaga", "Lasioglossum", "Other genera")) +
+                           scale_x_discrete(labels = c(expression(italic("Apis")), expression(italic("Bombus")), expression(italic("Osmia")), expression(italic("Megachile")), expression(italic("Xylocopa")), expression(italic("Andrena")), expression(italic("Melipona")), expression(italic("Manduca")), expression(italic("Trigona")), expression(italic("Centris")), expression(italic("Ceratosolen")), expression(italic("Glossophaga")), expression(italic("Lasioglossum")), "Other genera")) +
                            scale_fill_manual(name = "Taxonomic orders", values = colour_palette,  na.value = "grey") +
                            theme(panel.grid = element_blank(), panel.background = element_rect(), text = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 1)))
 

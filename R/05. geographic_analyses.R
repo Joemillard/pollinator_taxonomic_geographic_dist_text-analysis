@@ -305,10 +305,10 @@ taxonomy_map <- ggplot() +
         text = element_text(size = 12),
         panel.background = element_rect(fill = "white"), legend.position = "right",
         legend.key = element_rect(colour = NA, fill = NA), 
-        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm"), size = 12))
+        strip.text.x = element_text(margin = margin(0.25,0,0.25,0, "cm"), size = 12, face = "italic"))
 
 # combine the plots
 taxonomy_map + other_map + plot_layout(ncol = 1)
 
 # save the plot
-ggsave("abstract_geoparse-taxonomic-group_23.png", dpi = 380, scale = 1.6)
+ggsave("abstract_geoparse-taxonomic-group_24.png", dpi = 380, scale = 1.6)
