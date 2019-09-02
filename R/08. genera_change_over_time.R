@@ -111,7 +111,25 @@ joined_species_bombus <- joined_species_2 %>%
 
 # putting the ditted line in the Apis and Bombus facets
 joined_species_apis$scientific_name <- gsub("Other", "Apis", joined_species_apis$scientific_name) 
-joined_species_bombus$scientific_name <- gsub("Other", "Bombus", joined_species_bombus$scientific_name) 
+joined_species_bombus$scientific_name <- gsub("Other", "Bombus", joined_species_bombus$scientific_name)
+
+# relevelling for italics
+levels(joined_species$scientific_name) <- c("Other" = "Other", 
+                                            "Apis" = expression(paste(italic("Apis"), "")),
+                                            "Bombus" = expression(paste(italic("Bombus"), ""))
+                                            )
+
+# convert apis and bombus data frame to factor and relevel for italics
+joined_species_apis$scientific_name <- factor(joined_species_apis$scientific_name)
+joined_species_bombus$scientific_name <- factor(joined_species_bombus$scientific_name)
+levels(joined_species_apis$scientific_name) <- c("Apis" = expression(paste(italic("Apis"), "")))
+levels(joined_species_bombus$scientific_name) <- c("Bombus" = expression(paste(italic("Bombus"), "")))
+
+# reorder the facets
+joined_species$scientific_name <- factor(joined_species$scientific_name, 
+                                         levels = c(expression(paste(italic("Apis"), "")), 
+                                         expression(paste(italic("Bombus"), "")),
+                                         "Other"))
 
 # single facet plot for apis, bombus and other genera
 ggplot() + 
@@ -120,14 +138,14 @@ ggplot() +
   geom_smooth(aes(x = variable, y = value.x), colour = "red",  size = 1.1, method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_apis, se = FALSE) +
   geom_smooth(aes(x = variable, y = value.x), colour = "red", size = 1.1, method = "glm", linetype = "dashed", method.args = list(family = "poisson"), na.rm = FALSE, data = joined_species_bombus, se = FALSE) +
   ylab("Annual study count") +
-  facet_wrap(~scientific_name, ncol = 3) +
+  facet_wrap(~scientific_name, ncol = 3, labeller = label_parsed) +
   xlab("") +
   scale_fill_viridis(name = "Count density ", breaks = c(0, 50, 100, 150), limits = c(0, 150)) +
   guides(fill = guide_colourbar(ticks = FALSE), title.position = "top") +
   scale_x_continuous(breaks = c(1960, 1970, 1980, 1990, 2000, 2010)) +
   scale_y_continuous(breaks = c(0, 20, 40, 60, 80, 100, 120, 140), limits = c(-2, 150), expand = c(0, 0.5)) +
   theme_bw() +
-  scale_colour_manual(values = c("red", "black", "black"), labels = c("Apis", "Bombus", "Other"), breaks = c("Apis", "Bombus", "Other")) +
+  scale_colour_manual(values = c("black", "black", "red"), labels = c("Apis", "Bombus", "Other"), breaks = c("Apis", "Bombus", "Other")) +
   theme(panel.grid = element_blank(), 
         legend.key.size = unit(1.5, 'lines'), 
         strip.text.x = element_text(size = 12), 
@@ -137,7 +155,7 @@ ggplot() +
   guides(colour = FALSE) +
   guides(fill = guide_colourbar(ticks = FALSE, override.aes = list(alpha = 0.25)))
 
-ggsave("top_10_genus_yearly-change-14.png", dpi = 400, scale = 1.2)
+ggsave("top_10_genus_yearly-change-16.png", dpi = 400, scale = 1.2)
 
 # overall change for pollination studies
 ggplot(joined_species) + 
@@ -151,3 +169,7 @@ ggplot(joined_species) +
         text = element_text(size = 14))
 
 ggsave("overall-pollination-studies-change_03.png", dpi = 350, scale = 1.1)
+
+# explicit model for genera change over time
+change_model <- glm(value.x ~ variable + scientific_name, family = "poisson", data = joined_species)
+
