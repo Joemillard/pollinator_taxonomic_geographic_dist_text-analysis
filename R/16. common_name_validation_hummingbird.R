@@ -50,6 +50,49 @@ abstracts <- scopus_download %>%
   rename(abstract = Abstract) %>%
   .[1:30644,]
 
+# strings to check for 
+moth_strings <- c("hawk moth", "hawk-moth", "Sphingidae")
+
+# run function to count number of strings and then just take the EID
+moth <- count_bees(abstracts, moth_strings)
+
+moth_new <- moth %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
+
+# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+species_moth <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Sphingidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
+
+# calculate the overlap between the scientific names and common names
+scrape_common_moth <- full_join(species_moth, moth_new, by = "EID")
+
+# rename column
+scrape_common_moth <- scrape_common_moth %>%
+  rename("scraped" = "type.x") %>%
+  rename("common" = "type.y")
+
+# assign TRUE/FALSE according to overlap
+scrape_common_moth$scraped <- !is.na(scrape_common_moth$scraped)
+scrape_common_moth$common <- !is.na(scrape_common_moth$common)
+
+# change TREU/FALSE to values for overlap
+scrape_common_moth$type_1[scrape_common_moth$scraped == TRUE & scrape_common_moth$common == TRUE] <- 1
+scrape_common_moth$type_1[scrape_common_moth$scraped == TRUE & scrape_common_moth$common == FALSE] <- 2
+scrape_common_moth$type_1[scrape_common_moth$scraped == FALSE & scrape_common_moth$common == TRUE] <- 3
+
+# plot across two panels
+Moth <- scrape_common_moth %>%
+  mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
+  ggplot() +
+  geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
+  scale_fill_manual("Taxonomic name", 
+                    label = c("Common only","Latin only", "Latin and Common"),
+                    values = c("red", "orange", "grey")) +
+  guides(fill = FALSE) +
+  theme_bw() +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 800)) +
+  xlab("Hawk-moths") +
+  ylab("Abstract count") +
+  theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
+
 # remove string for humming hawk-moth from the abstracts
 abstracts$abstract <- gsub("hummingbird hawk-moth", "", abstracts$abstract)
 abstracts$abstract <- gsub("hummingbird hawk moth", "", abstracts$abstract)
@@ -67,24 +110,24 @@ hummingbird_new <- hummingbird %>% mutate(type = "common") %>% select(-bee_strin
 species_hummingbird <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Trochilidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
-scrape_common <- full_join(species_hummingbird, hummingbird_new, by = "EID")
+scrape_common_bird <- full_join(species_hummingbird, hummingbird_new, by = "EID")
 
 # rename column
-scrape_common <- scrape_common %>%
+scrape_common_bird <- scrape_common_bird %>%
   rename("scraped" = "type.x") %>%
   rename("common" = "type.y")
 
 # assign TRUE/FALSE according to overlap
-scrape_common$scraped <- !is.na(scrape_common$scraped)
-scrape_common$common <- !is.na(scrape_common$common)
+scrape_common_bird$scraped <- !is.na(scrape_common_bird$scraped)
+scrape_common_bird$common <- !is.na(scrape_common_bird$common)
 
 # change TREU/FALSE to values for overlap
-scrape_common$type_1[scrape_common$scraped == TRUE & scrape_common$common == TRUE] <- 1
-scrape_common$type_1[scrape_common$scraped == TRUE & scrape_common$common == FALSE] <- 2
-scrape_common$type_1[scrape_common$scraped == FALSE & scrape_common$common == TRUE] <- 3
+scrape_common_bird$type_1[scrape_common_bird$scraped == TRUE & scrape_common_bird$common == TRUE] <- 1
+scrape_common_bird$type_1[scrape_common_bird$scraped == TRUE & scrape_common_bird$common == FALSE] <- 2
+scrape_common_bird$type_1[scrape_common_bird$scraped == FALSE & scrape_common_bird$common == TRUE] <- 3
 
 # plot across two panels
-Hummingbird <- scrape_common %>%
+Hummingbird <- scrape_common_bird %>%
   mutate(type_1 = factor(type_1, levels = c(3, 2, 1))) %>%
   ggplot() +
   geom_bar(aes(x = 1, fill = type_1), stat = "count", position = "stack", colour = "black") +
@@ -183,7 +226,6 @@ Fly <- scrape_common_fly %>%
   xlab("Hoverflies") +
   theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
 
-
 # strings to check for lead-nosed bats
 bat_strings <- c("Phyllostomidae", "leaf-nosed bat", "leaf nosed bat", "Leaf-nosed bat")
 
@@ -226,6 +268,6 @@ Bat <- scrape_common_bat %>%
   theme(axis.ticks.x = element_blank(), axis.text.x = element_blank(), axis.text.y = element_blank(), axis.title.y = element_blank(), axis.ticks.y = element_blank())
 
 # create the multiplot and save
-Hummingbird + Fig + Fly + Bat + plot_layout(ncol = 4)
+Hummingbird + Fig + Fly + Moth + Bat + plot_layout(ncol = 5)
 
 ggsave("family_name_validation.png", scale = 1, dpi = 350)
