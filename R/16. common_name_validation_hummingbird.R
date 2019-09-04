@@ -51,7 +51,7 @@ abstracts <- scopus_download %>%
   .[1:30644,]
 
 # strings to check for 
-moth_strings <- c("hawk moth", "hawk-moth", "Sphingidae")
+moth_strings <- c("Hawk-moth", "hawk moth", "hawk-moth", "Sphingidae")
 
 # run function to count number of strings and then just take the EID
 moth <- count_bees(abstracts, moth_strings)
@@ -99,7 +99,7 @@ abstracts$abstract <- gsub("hummingbird hawk moth", "", abstracts$abstract)
 abstracts$abstract <- gsub("hummingbird hawkmoth", "", abstracts$abstract)
 
 # strings to check for 
-hummingbird_strings <- c("hummingbird", "Hummingbird", "Trochilidae")
+hummingbird_strings <- c("humming-bird", "hummingbird", "Hummingbird", "Trochilidae")
 
 # run function to count number of strings and then just take the EID
 hummingbird <- count_bees(abstracts, hummingbird_strings)
@@ -270,4 +270,4 @@ Bat <- scrape_common_bat %>%
 # create the multiplot and save
 Hummingbird + Fig + Fly + Moth + Bat + plot_layout(ncol = 5)
 
-ggsave("family_name_validation.png", scale = 1, dpi = 350)
+ggsave("family_name_validation_2.png", scale = 1, dpi = 350)
