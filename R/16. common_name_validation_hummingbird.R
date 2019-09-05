@@ -50,7 +50,7 @@ abstracts <- scopus_download %>%
   rename(abstract = Abstract) %>%
   .[1:30644,]
 
-# strings to check for 
+# strings to check for hawk-moth
 moth_strings <- c("Hawk-moth", "hawk moth", "hawk-moth", "Sphingidae")
 
 # run function to count number of strings and then just take the EID
@@ -58,7 +58,7 @@ moth <- count_bees(abstracts, moth_strings)
 
 moth_new <- moth %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
 
-# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+# subset the main scrape to find any abstracts that mention scientific name for hawk-moths
 species_moth <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Sphingidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
@@ -106,7 +106,7 @@ hummingbird <- count_bees(abstracts, hummingbird_strings)
 
 hummingbird_new <- hummingbird %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
 
-# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+# subset the main scrape to find any abstracts that mention scientific name for hummingbirds
 species_hummingbird <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Trochilidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
@@ -150,7 +150,7 @@ fig <- count_bees(abstracts, fig_strings)
 
 fig_new <- fig %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
 
-# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+# subset the main scrape to find any abstracts that mention scientific name for fig wasps
 species_fig <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Agaonidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
@@ -192,7 +192,7 @@ fly <- count_bees(abstracts, fly_strings)
 
 fly_new <- fly %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
 
-# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+# subset the main scrape to find any abstracts that mention scientific name for hoverflies
 species_fly <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Syrphidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
@@ -234,7 +234,7 @@ bat <- count_bees(abstracts, bat_strings)
 
 bat_new <- bat %>% mutate(type = "common") %>% select(-bee_strings.j.) %>% rename("EID" = "download.EID.i.") %>% unique()
 
-# subset the main scrape to find any abstracts that mention scientific name for bombus and Apis
+# subset the main scrape to find any abstracts that mention scientific name for leaf-nosed bats
 species_bat <- species_scraped %>% dplyr::filter(taxa_data.family.i. == "Phyllostomidae") %>% dplyr::select(EID) %>% unique() %>% mutate(type = "scraped")
 
 # calculate the overlap between the scientific names and common names
