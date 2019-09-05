@@ -28,7 +28,7 @@ The required script are as follows:
 ```R/12. geoparse_validation_maps.R```<br>
 ```R/13. geoparse_validation_exact_match_comparison.R```<br>
 ```R/14. prisma_diagram.R```<br>
-```R/15. common_name_validation.R```
+```R/15. common_name_validation.R``` <br>
 ```R/16. common_name_validation_hummingbird.R```
 
 ## See below for brief script overviews and session info:
