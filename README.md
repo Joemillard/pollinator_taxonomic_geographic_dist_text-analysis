@@ -28,7 +28,8 @@ The required script are as follows:
 ```R/12. geoparse_validation_maps.R```<br>
 ```R/13. geoparse_validation_exact_match_comparison.R```<br>
 ```R/14. prisma_diagram.R```<br>
-```R/15. common_name_validation.R```
+```R/15. common_name_validation.R``` <br>
+```R/16. common_name_validation_hummingbird.R```
 
 ## See below for brief script overviews and session info:
 
@@ -446,6 +447,32 @@ loaded via a namespace (and not attached):
 [13] withr_2.1.2      yaml_2.2.0       lazyeval_0.2.1   assertthat_0.2.1 tibble_2.1.1     crayon_1.3.4    
 [19] purrr_0.2.5      glue_1.3.1       stringi_1.2.4    compiler_3.5.1   pillar_1.4.1     scales_1.0.0    
 [25] pkgconfig_2.0.2 
+```
+```R/16. common_name_validation_hummingbird.R``` - script for counting the number of family name (Latin and common) strings in each abstract and comparing to the Latin binomial names
+
+Session info
+```
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows >= 8 x64 (build 9200)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United Kingdom.1252  LC_CTYPE=English_United Kingdom.1252    LC_MONETARY=English_United Kingdom.1252
+[4] LC_NUMERIC=C                            LC_TIME=English_United Kingdom.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] patchwork_0.0.1   forcats_0.4.0     ggplot2_3.1.0     stringr_1.4.0     data.table_1.12.0 dplyr_0.8.0.1    
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.1       rstudioapi_0.10  magrittr_1.5     tidyselect_0.2.5 munsell_0.5.0    colorspace_1.4-1 R6_2.4.0        
+ [8] rlang_0.3.3      plyr_1.8.4       tools_3.5.1      grid_3.5.1       gtable_0.3.0     withr_2.1.2      yaml_2.2.0      
+[15] lazyeval_0.2.2   assertthat_0.2.1 tibble_2.1.1     crayon_1.3.4     purrr_0.3.2      glue_1.3.1       stringi_1.4.3   
+[22] compiler_3.5.1   pillar_1.3.1     scales_1.0.0     pkgconfig_2.0.2 
 ```
 
 **References** <br>
