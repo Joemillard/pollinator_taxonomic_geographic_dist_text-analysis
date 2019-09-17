@@ -2,11 +2,11 @@
 
 This repository contains all the scripts used for the text analysis carried out in the below review:
 
-> **Millard et al (in prep.), Text-analysis reveals taxonomic and geographic disparities in animal pollination literature**
+> **Millard _et al_ (2019), Text-analysis reveals taxonomic and geographic disparities in animal pollination literature. _Ecography_, doi: 10.1111/ecog.04532**
 
 Please note that this repository is only partially reproducible. To reproduce this analysis, follow the instructions at https://github.com/ahalterman/CLIFF-up to set up the geoparser CLIFF_CLAVIN before running script 04a. A .txt copy of the 2017 Catalogue of Life is also required for script 02. (see Roskov et al, 2017).
 
-There are 14 R scripts and 1 python script in this analysis, run sequentially from 01-15. The python script 4a. requires an active instance of CLIFF-CLAVIN running at the local host. All key data written to csv are also hosted here (with the exception of taxonomic data in 02. and 03.), as well as any additional csvs read in throughout the analysis.
+There are 15 R scripts and 1 python script in this analysis, run sequentially from 01-16. The python script 4a. requires an active instance of CLIFF-CLAVIN running at the local host. All key data written to csv are also hosted here (with the exception of taxonomic data in 02. and 03.), as well as any additional csvs read in throughout the analysis. Most scripts read in script "00. functions.R", which calls in additional functions required throughout the analysis.
 
 Note that this repository is written relative to an R project file (.Rproj). Those wanting to reproduce this analysis should download the whole repo, and then open via the .Rproj file. Also note that all required packages are included as a vector at the top of each script.
 
