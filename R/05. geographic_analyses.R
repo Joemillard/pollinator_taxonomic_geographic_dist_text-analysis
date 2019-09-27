@@ -138,11 +138,11 @@ count_map <- ggplot() +
         axis.ticks = element_blank(), 
         axis.title = element_blank(),
         axis.line = element_blank(),
-        text = element_text(size = 12),
+        text = element_text(size = 14),
         panel.background = element_rect(fill = "white"))
 
 # save the plot
-ggsave("abstract_geoparse-major-minor_count.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse-major-minor_count_2.png", dpi = 380, scale = 1.5)
 
 ## build bar plot frequencies for country proportions
 proportion_bar <- area_within %>% 
@@ -195,7 +195,7 @@ ggplot(proportion_bar) +
         legend.title = element_text(size = 15)) 
 
 # save the plot
-ggsave("abstract_geoparse_study-proportion-8.png", dpi = 380, scale = 1.5)
+ggsave("abstract_geoparse_study-proportion-9.png", dpi = 380, scale = 1.5)
 
 ## map facetted by taxonomic group - set up the data
 

@@ -104,7 +104,7 @@ genera_sub <- ggplotGrob(ggplot() +
                            scale_y_continuous(limits = c(0, 3250), expand = c(0, 0)) +
                            scale_x_discrete(labels = c(expression(italic("Apis")), expression(italic("Bombus")), expression(italic("Osmia")), expression(italic("Megachile")), expression(italic("Xylocopa")), expression(italic("Andrena")), expression(italic("Melipona")), expression(italic("Manduca")), expression(italic("Trigona")), expression(italic("Centris")), expression(italic("Ceratosolen")), expression(italic("Glossophaga")), expression(italic("Lasioglossum")), "Other genera")) +
                            scale_fill_manual(name = "Taxonomic orders", values = colour_palette,  na.value = "grey") +
-                           theme(panel.grid = element_blank(), panel.background = element_rect(), text = element_text(size = 10), axis.text.x = element_text(angle = 45, hjust = 1)))
+                           theme(panel.grid = element_blank(), panel.background = element_rect(), text = element_text(size = 13), axis.text.x = element_text(angle = 45, hjust = 1)))
 
 # subplot for all order breakdown
 ggplot(order_counts) +
@@ -120,7 +120,7 @@ ggplot(order_counts) +
     xmin = 2, xmax = 9, ymin = 900, ymax = 3600)
 
 # save the plot - genus
-ggsave("abstract_geoparse_genus-proportion-14.png", dpi = 380, scale = 1.1)
+ggsave("abstract_geoparse_genus-proportion-15.png", dpi = 380, scale = 1.1)
 
 ## supplmentary info genera breakdown plots
 

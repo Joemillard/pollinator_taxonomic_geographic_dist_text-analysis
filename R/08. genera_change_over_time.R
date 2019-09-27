@@ -166,9 +166,9 @@ ggplot(joined_species) +
   scale_x_continuous(breaks = c(1960, 1970, 1980, 1990, 2000, 2010)) +
   theme_bw() +
   theme(panel.grid = element_blank(),
-        text = element_text(size = 14))
+        text = element_text(size = 17))
 
-ggsave("overall-pollination-studies-change_03.png", dpi = 350, scale = 1.1)
+ggsave("overall-pollination-studies-change_04.png", dpi = 350, scale = 1.1)
 
 # explicit model for genera change over time
 change_model <- glm(value.x ~ variable + scientific_name, family = "poisson", data = joined_species)
