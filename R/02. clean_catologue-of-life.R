@@ -12,7 +12,7 @@ library(data.table)
 source("R/00. functions.R")
 
 # download and read in 2017 catalogue of life data
-taxa <- read.delim("data/taxonomic_data/taxa.txt", stringsAsFactors=FALSE)
+taxa <- read.delim("data/taxonomic_data/taxa.txt", stringsAsFactors=FALSE, quote = "")
 
 # clean data - seleting the appropriate columns and filtering for animals
 new_taxa <- taxa %>%
