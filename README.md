@@ -1,6 +1,6 @@
 # Quantifying the taxonomic and geographic distribution of the animal pollination literature
 
-[![DOI](https://zenodo.org/badge/391010761.svg)](https://doi.org/10.1111/ecog.04532) [![Generic badge](https://img.shields.io/badge/License-MIT-green.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/License-MIT-green.svg)](https://shields.io/)
 
 This repository contains all the scripts used for the text analysis carried out in the below review:
 
